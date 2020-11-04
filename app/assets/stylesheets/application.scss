@@ -226,9 +226,16 @@ table tbody.tbody_toggle td:hover{
     background-color: #444;
 }
 
-.btn-search {
-    border: 0.2rem solid $primary;
+.btn-outline-search {
+    border: 0.2rem solid $white;
     box-shadow: 0 0.1rem 0.5rem rgba(0,0,0,0.2);
+    color: $white;
+}
+
+.btn-outline-search:hover {
+    border: 0.2rem solid $white;
+    background-color: $white;
+    color: $gray-darker;
 }
 
 input[type=checkbox] {
