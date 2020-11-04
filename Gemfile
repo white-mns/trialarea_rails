@@ -16,6 +16,9 @@ gem 'haml-rails'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder'
 
+# Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
+gem 'turbolinks'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', require: false
 
