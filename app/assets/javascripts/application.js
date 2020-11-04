@@ -16,6 +16,7 @@
 //= require_tree .
 //= require jquery
 //= require bootstrap-sprockets
+//= require "jquery.cleanQuery"
 //= require chartkick
 
 // 検索遷移時の検索フォームの閉じる処理
