@@ -1,41 +1,39 @@
-# ゼロ城試遊会データ小屋　表示用Railsアプリ
-ゼロ城試遊会データ小屋は[ゼロの城砦](http://blacktea.sakura.ne.jp/teaconvini/)を解析して得られるデータを扱った情報サイトです。  
-このプログラムはゼロ城試遊会データ小屋で実際に使用している表示用のRailsアプリです。  
-データ小屋の解析部分については[別リポジトリ](https://github.com/white-mns/zero_parse)を参照ください。
+# 定期更新ゲーム過去結果データ小屋　表示用Railsアプリ
+定期更新ゲーム過去結果データ小屋は各種定期更新ゲームの過去結果を解析して得られるデータを扱った情報サイトです。  
+masterブランチは各定期更新ゲームのデータ形式に対応する前の雛形の状態です。  
+実際に運用されいているコードを見る場合は各branchを閲覧ください。  
+データ小屋の解析部分については[別リポジトリ](https://github.com/white-mns/teiki_archive_parse)を参照ください。
 
 # サイト
-実際に動いているサイトです。 
-[ゼロ城試遊会データ小屋](https://data.teiki.org/zero_0)
+雛形用ブランチのため、masterブランチのコードで動いているサイトはありません。 
 
 # 動作環境
 以下の環境での動作を確認しています  
   
 OS:CentOS release 6.5 (Final)  
-DB:MySQL  
+DB:MySQL 8.0.13  
 Ruby:2.5.0  
-Rails:5.2.1
-gcc:5.2.1
+Rails:5.2.1  
+gcc:7.3.1
 
 ## 使い方
 ・Railsの使い方を調べてなんやかんやして自分のRailsアプリが動くようにします。  
 ・このソースコードをダウンロードします。  
 
-    git clone git://github.com/white-mns/zero_rails.git
+    git clone git://github.com/white-mns/teiki_archive_rails.git
 
 ・動かします。  
 
-    cd zero_rails
-    bundle install --path vendor/bundler
-（Gemのインストール先をアプリのディレクトリ内のvendor/bundleに指定します。  
-　この指定はなくても構いません。指定しない場合システム全体で共有されるgemを利用します）
- 
+    cd teiki_archive_rails
+    bundle install --path
+
 ・DBを作成し、必要なテーブルの設定を行います。
  
     bundle exec rake db:create
     bundle exec rake db:migrate
     ./unicorn start
     
-他の方法でRailsが動かせるならUnicornである必要はないです。  
+他の方法でRailsが動かせるならUnicornである必要はありません。  
 ちなみにデータ小屋は開発環境をUnicorn(アプリ一つずつ再起動できる)、本番環境をPassenger（しばらく利用されてないアプリは眠らせられる）としています。
 デフォルトの設定だと`http://サーバーのアドレス:61000`で画面が見れます。
 
@@ -76,9 +74,9 @@ scaffoldで必要なものは大体用意されます。
 また、Modelはテンプレートで作成できなかったので、以下の行をModelの中に記述します。  
 これでキャラクター名が関連付けられるようになります。
 
-	belongs_to :p_name,	:foreign_key => [:e_no, :result_no, :generate_no], :primary_key => [:e_no, :result_no, :generate_no], :class_name => 'Name'
+	belongs_to :p_name, :foreign_key => [:e_no, :result_no, :generate_no], :primary_key => [:e_no, :result_no, :generate_no], :class_name => 'Name'
 
-あとは[解析プログラム](https://github.com/white-mns/zero_parse)側で解析とアップロード機能を作ってデータを入れれば新しい解析項目が公開されます。
+あとは[解析プログラム](https://github.com/white-mns/teiki_archive_parse)側に圧縮ファイルを用意し、解析とアップロード機能を追加してデータを入れれば新しい解析項目が公開されます。
 
 ## ライセンス
 本ソフトウェアはMIT Licenceを採用しています。 ライセンスの詳細については`LICENSE`ファイルを参照してください。
