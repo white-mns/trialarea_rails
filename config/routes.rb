@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :uploaded_checks
   resources :proper_names
   resources :names
   get "privacy", :to => "top_page#privacy", :as => "privacy"

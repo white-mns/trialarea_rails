@@ -2,8 +2,8 @@ class ApplicationController < ActionController::Base
   def resultno_set
     @latest_result = Name.maximum("result_no")
     @latest_round = Name.where(result_no: @latest_result).maximum("round_no")
-    #@uploaded_result = UploadedCheck.maximum("result_no")
-    #@uploaded_round = UploadedCheck.where(result_no: @latest_result).maximum("result_no")
+    @uploaded_result = UploadedCheck.maximum("result_no")
+    @uploaded_round = UploadedCheck.where(result_no: @latest_result).maximum("result_no")
   end
 
   def placeholder_set
