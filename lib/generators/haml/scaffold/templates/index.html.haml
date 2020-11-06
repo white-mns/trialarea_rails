@@ -27,13 +27,15 @@
       %tr
       %tr
         %td.indent
-        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "更新回", params_name: "result_no_form", placeholder: nil, colspan: 3)
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "大会", params_name: "result_no_form", placeholder: nil)
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "回戦", params_name: "round_no_form", placeholder: nil)
       %tr
         %td.indent
-        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "Eno", params_name: "e_no_form", placeholder: "Number")
+        - td_form(f, @form_params, @placeholder, class_name: "formText", label: "キャラクター名", params_name: "pc_name_form", placeholder: "Name", colspan: 3)
       %tr
         %td.indent
-        - td_form(f, @form_params, @placeholder, class_name: "formText", label: "キャラクター名", params_name: "pc_name_form", placeholder: "Name")
+        - td_form(f, @form_params, @placeholder, class_name: "formText", label: "プレイヤー", params_name: "player_form")
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "ID", params_name: "player_id_form")
 <% attributes.reject(&:password_digest?).each do |attribute| -%>
       %tr
         %td.indent
@@ -55,8 +57,9 @@
 %table.table.table-striped.table-bordered.table-hover
   %thead
     %tr
-      %th= sort_link(@search, :result_no,"更新回", default_order: :desc)
-      %th= sort_link(@search, :e_no,"キャラクター(Eno)", default_order: :desc)
+      %th= sort_link(@search, :result_no,"大会", default_order: :desc)
+      %th= sort_link(@search, :round_no,"回戦", default_order: :desc)
+      %th= sort_link(@search, :link_no,"キャラクター[ID]", default_order: :desc)
 <% attributes.reject(&:password_digest?).each do |attribute| -%>
       %th= sort_link(@search, :<%= attribute.name %>, <%= "\"" +  attribute.human_name + "\"" %>, default_order: :desc)
 <% end -%>
@@ -65,10 +68,10 @@
     - @<%= plural_table_name %>.each do |<%= singular_table_name %>|
       %tr
         %td= <%= singular_table_name %>.result_no
-        %td= pc_name_text(<%= singular_table_name %>.e_no, <%= singular_table_name %>.pc_name)
+        %td= <%= singular_table_name %>.round_no
+        %td= pc_name_text(<%= singular_table_name %>.link_no, <%= singular_table_name %>.pc_name)
 <% attributes.reject(&:password_digest?).each do |attribute| -%>
         %td= <%= singular_table_name %>.<%= attribute.name %>
 <% end -%>
-        %td.sep= character_link(<%= singular_table_name %>.e_no)
-        %td= character_old_link(@latest_result, <%= singular_table_name %>.e_no, <%= singular_table_name %>.result_no, <%= singular_table_name %>.generate_no)
+        %td.sep= character_link(<%= singular_table_name %>.result_no, <%= singular_table_name %>.round_no, <%= singular_table_name %>.link_no)
 = paginate(@<%= plural_table_name %>)
