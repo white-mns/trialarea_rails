@@ -16,9 +16,9 @@
           %ul
             %li= link_to "キャラクター名・プレイヤー名一覧", names_path
             %br
-      .col-md-6
-        %ul
-          %li 結果データ
+            %li= link_to "習得スキル一覧", skills_path
+            %ul
+              %li= link_to "スキル習得者数ランキング", skills_path + "?show_total=1&ex_sort=on"
 
 .card.top
   .card-body
