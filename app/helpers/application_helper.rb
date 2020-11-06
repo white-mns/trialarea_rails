@@ -1,6 +1,6 @@
 module ApplicationHelper
   def page_title
-    title = "定期更新ゲームデータ小屋"
+    title = "試行領域データ小屋"
     title = @page_title + " | " + title if @page_title
     title
   end
@@ -18,30 +18,32 @@ module ApplicationHelper
     end
   end
 
-  def pc_name_text(e_no, pc_name)
-    e_no_text = "(" + sprintf("%d",e_no) + ")"
+  def pc_name_text(player_id, pc_name)
+    player_id_text = " [PL:" + sprintf("%d",player_id) + "]"
     if pc_name then
-      pc_name.name.html_safe + e_no_text
+      pc_name.name.html_safe + player_id_text
     else
-      e_no_text
+      player_id_text
     end
   end
 
-  def character_link(e_no)
-    if e_no <= 0 then return end
-
-    file_name = sprintf("%d",e_no)
-    link_to " 最終結果", "https://xxx.xxx/"+file_name+".html", :target => "_blank"
+  def player_name_text(player_id, pc_name)
+    player_id_text = " [" + sprintf("%d",player_id) + "]"
+    if pc_name then
+      pc_name.player.html_safe + player_id_text
+    else
+      player_id_text
+    end
   end
 
-  def character_old_link(latest_result_no, e_no, result_no, generate_no)
-    if e_no <= 0 then return end
-    if result_no == latest_result_no then return end
+  def character_link(result_no, round_no, link_no)
+    if link_no <= 0 then return end
 
-    result_no_text = sprintf("%d", result_no)
-    generate_text  = generate_no > 0 ? "_" + sprintf("%d", generate_no) : ""
-    file_name = sprintf("%d", e_no)
-    link_to " 過去結果", "https://xxx.xxx/"+result_no_text+generate_text+"/"+file_name+".html", :target => "_blank"
+    result_no_text = sprintf("%d",result_no + 1)
+    round_no_text = sprintf("%d",round_no)
+    link_no_text = sprintf("%d",link_no)
+
+    link_to " キャラクター", "http://133.130.112.98/trialarea/result_charalist/" + result_no_text + "/" + round_no_text + "#"+ link_no_text, :target => "_blank"
   end
 
   def search_submit_button()
