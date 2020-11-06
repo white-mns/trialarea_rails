@@ -13,7 +13,7 @@ class <%= controller_class_name %>Controller < ApplicationController
     placeholder_set
     param_set
 
-    @count = <%= class_name %>.notnil().includes(:pc_name).search(params[:q]).result.hit_count()
+    @count  = <%= class_name %>.notnil().includes(:pc_name).search(params[:q]).result.hit_count()
     @search = <%= class_name %>.notnil().includes(:pc_name).page(params[:page]).search(params[:q])
     @search.sorts = "id asc" if @search.sorts.empty?
     @<%= plural_table_name %> = @search.result.per(50)
@@ -22,14 +22,14 @@ class <%= controller_class_name %>Controller < ApplicationController
   def param_set
     @form_params = {}
 
-    @latest_result = Name.maximum("result_no")
-
     params_clean(params)
     unless params["is_form"]
       params["result_no_form"] ||= sprintf("%d",@latest_result)
+      params["round_no_form"] ||= sprintf("%d",@latest_round)
     end
 
-    params_to_form(params, @form_params, column_name: "pc_name_name", params_name: "pc_name_form", type: "text")
+    params_to_form(params, @form_params, column_name: "pc_name_name",   params_name: "pc_name_form", type: "text")
+    params_to_form(params, @form_params, column_name: "pc_name_player", params_name: "player_form",  type: "text")
 <% attributes.reject(&:password_digest?).each do |attribute| -%>
     params_to_form(params, @form_params, column_name: "<%= attribute.name %>", params_name: "<%= attribute.name %>_form", type: "number")
 <% end -%>

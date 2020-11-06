@@ -1,10 +1,10 @@
-%h1 定期更新ゲームデータ小屋
+%h1 試行領域ゲームデータ小屋
 %p
   このサイトでは『
-  %a{:href => "https://archives.teiki.org/", :target => "_blank"} 定期更新ゲーム名
+  %a{:href => "http://133.130.112.98/trialarea/", :target => "_blank"} 試行領域
   』を解析して得られる情報を扱っています。
 %br
-%p= top_text(@latest_result, @latest_generate, @uploaded_result)
+%p= top_text(@latest_result, @latest_round, @uploaded_result)
 
 .card.top
   .card-body
@@ -14,6 +14,8 @@
         %ul
           %li 個人データ
           %ul
+            %li= link_to "キャラクター名・プレイヤー名一覧", names_path
+            %br
       .col-md-6
         %ul
           %li 結果データ

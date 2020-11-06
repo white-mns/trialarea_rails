@@ -15,14 +15,21 @@
  */
 
 $light:                             #444;
-$white:                             #fff;
+$white:                             #f8f9fa;
 $gray:                              #444 ;
 $gray-darker:                       #222 ;
 $gray-dark:                         #282828 ;
 $gray-light:                        #888 ;
+$gray-lighter:                      #d8d9da ;
+$blue-light:                        #e1ebef;
+$blue-stripe:                       #d7d8db;
+$blue:                              #b5b7bb;
+$blue-dark:                         #94acce;
+$blue-border:                       #29468a;
+$blue-border-dark:                  #00306b;
 
-$link-color:                        #6df;
-$link-hover-color:                  #fd0;
+$link-color:                        #007bff;
+$link-hover-color:                  #0056b3;
 $nav-hover-bg-color:                #555;
 $nav-active-bg-color:               #222;
 $navbar-light-color:                $white;
@@ -32,28 +39,27 @@ $navbar-light-toggler-border-color: transparent;
 $dropdown-link-hover-bg:            $link-hover-color;
 $dropdown-link-active-bg:           $link-hover-color;
 $table-border-color:                #888 ;
-$table-hover-bg:                    $gray;
-$nav-border-color:                  MediumSeaGreen;
+$table-hover-bg:                    $gray-lighter;
 
-// Cyborgテーマからページネーションのカラーリングをコピー
-$pagination-color:                  #fff;
-$pagination-bg:                     $gray-darker;
-$pagination-border-color:           #888;
+$pagination-color:                  $gray;
+$pagination-bg:                     $blue-light;
+$pagination-border-color:           $blue-border;
 $pagination-border-width:           0.05rem;
 
-$pagination-hover-color:            #fff;
-$pagination-hover-bg:               #2A9FD6;
-$pagination-hover-border-color:     transparent;
+$pagination-hover-color:            $gray;
+$pagination-hover-bg:               $blue;
+$pagination-hover-border-color:     $blue-border;
 
-$pagination-active-color:           #fff;
-$pagination-active-bg:              #2A9FD6;
-$pagination-active-border-color:    transparent;
+$pagination-active-color:           $gray;
+$pagination-active-bg:              $blue;
+$pagination-active-border-width:    0.05rem;
+$pagination-active-border-color:    $blue-border;
 
-$pagination-disabled-color:         $gray-light;
-$pagination-disabled-bg:            $gray-darker;
-$pagination-disabled-border-color:  #888;
+$pagination-disabled-color:         $gray;
+$pagination-disabled-bg:            $blue;
+$pagination-disabled-border-color:  $blue-border;
 
-@import "bootswatch/darkly/variables";
+@import "bootswatch/flatly/variables";
 @import "bootstrap";
 
 
@@ -62,9 +68,8 @@ body { padding-top: 5rem; }
 @import "bootswatch/darkly/bootswatch";
 
 .navbar-custom {
-    border-color: $nav-border-color;
     border-style: none none solid none;
-    border-width: 0.3rem;
+    border-width: 0rem;
 }
 
 .navbar-custom .navbar-brand,{
@@ -209,21 +214,13 @@ table tbody:nth-child(1) span.act_desc{
     font-size:80%;
 }
 
-table tbody:nth-child(1) td{
-    background-color: #666;
-}
-
-table tbody:nth-child(1) td:hover{
-    background-color: #444;
-}
-
 table tbody.tbody_toggle td{
-    background-color: #666;
+    //background-color: #666;
     padding-left: 2em;
 }
 
 table tbody.tbody_toggle td:hover{
-    background-color: #444;
+    //background-color: #444;
 }
 
 .btn-outline-search {

@@ -10,6 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2020_11_06_055753) do
+
+  create_table "names", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+    t.integer "result_no"
+    t.integer "round_no"
+    t.integer "player_id"
+    t.integer "link_no"
+    t.string "name"
+    t.string "player"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["result_no", "round_no", "name"], name: "resultno_name"
+    t.index ["result_no", "round_no", "player"], name: "resultno_player"
+    t.index ["result_no", "round_no", "player_id"], name: "resultno_playerid"
+  end
 
 end
