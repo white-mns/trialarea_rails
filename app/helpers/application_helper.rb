@@ -159,4 +159,14 @@ module ApplicationHelper
       end
     end
   end
+
+  def skill_type_text(skill_type)
+    unless skill_type then return end
+
+    if    skill_type == 0 then return "スキル"
+    elsif skill_type == 1 then return "アビリティ"
+    elsif skill_type == 2 then return "覚醒"
+    else return ""
+    end
+  end
 end
