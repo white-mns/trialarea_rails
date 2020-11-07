@@ -88,7 +88,6 @@
         %td{colspan: "3"}
           - search_submit_button
 
-
 = paginate(@skills)
 %br
 ヒット数：#{ @count }件
@@ -109,6 +108,7 @@
         %th= sort_link(@search, :skill_text, "説明", default_order: :desc)
       - if @form_params["show_total"] == "1"
         %th.sep= sort_link(@search, :user_count, ex_sort_text(params, "user_count", "習得者数"), default_order: :desc)
+        %th= sort_link(@search, :user_count, ex_sort_text(params, "user_count", "習得割合"), default_order: :desc)
       - if @form_params["show_total"] != "1"
         %th.sep{colspan: "2"} 結果リンク
   %tbody
@@ -125,6 +125,7 @@
           %td= skill.skill.text
         - if @form_params["show_total"] == "1"
           %td.text-nowrap.sep= skill.user_count
+          %td= skill_rate_text(skill, @maxes)
         - if @form_params["show_total"] != "1"
           %td.sep= character_link(skill.result_no, skill.round_no, skill.link_no)
 = paginate(@skills)
