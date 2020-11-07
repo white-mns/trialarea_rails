@@ -1,4 +1,4 @@
-%h1 試行領域ゲームデータ小屋
+%h1 試行領域データ小屋
 %p
   このサイトでは『
   %a{:href => "http://133.130.112.98/trialarea/", :target => "_blank"} 試行領域
@@ -16,14 +16,15 @@
           %ul
             %li= link_to "キャラクター名・プレイヤー名一覧", names_path
             %br
-      .col-md-6
-        %ul
-          %li 結果データ
+            %li= link_to "習得スキル一覧", skills_path
+            %ul
+              %li= link_to "スキル習得者数ランキング", skills_path + "?show_total=1&ex_sort=on"
+            %li= link_to "習得スキル組み合わせ一覧", skill_concatenates_path
 
 .card.top
   .card-body
     %h2 更新履歴
     %ul
-      %li 20--/-/-
+      %li 2020/11/7
       %ul
         %li サイト公開

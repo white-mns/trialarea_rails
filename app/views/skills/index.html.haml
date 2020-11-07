@@ -1,0 +1,131 @@
+- @page_title = "習得スキル一覧"
+- if @form_params["show_total"] == "1"
+  - @page_title = "スキル習得人数"
+  - if @form_params["ex_sort"] == "on"
+    - @page_title = "スキル習得人数ランキング"
+%h1= @page_title
+
+.card.desc
+  .card-header
+    - act_icon(true)
+    検索仕様
+    - act_desc(true)
+  .card-body
+    = render "layouts/base_desc"
+    %p
+      ※第0回、第1回大会についてはスキルのAP、属性、説明の表示・絞り込み検索はできません。
+    %p
+      ※属性検索では「○攻撃を行う」スキルの絞り込みを行います。
+    %p
+      %span.example_select.example_toggle.pointer
+        - help_icon
+        入力例
+        - act_desc(false)
+    #example.closed
+      = render "layouts/input_desc"
+= search_form_for @search do |f|
+  %table.search_toggle.table.table-striped.table-bordered.table-hover
+    %tbody.pointer
+      %tr
+        %td{colspan: "5"}
+          - act_icon(true)
+          絞り込み検索
+          - act_desc(true)
+    %tbody
+      %tr
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "大会", params_name: "result_no_form", placeholder: nil)
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "回戦", params_name: "round_no_form", placeholder: nil)
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formText", label: "キャラクター名", params_name: "pc_name_form", placeholder: "Name", colspan: 3)
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formText", label: "プレイヤー", params_name: "player_form")
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "ID", params_name: "player_id_form")
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder,                         label: "種類", params_name: "element_form", colspan: 3,
+                    checkboxes: [{label: "スキル", params_name: "type_skill",   class_name: "after_space mobile_br"},
+                                 {label: "アビリティ", params_name: "type_ability",   class_name: "after_space"}])
+      %tr.sep
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "スキル名", params_name: "skill_name_form", placeholder: "Skill")
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "AP", params_name: "ap_form", placeholder: "Number")
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder,                         label: "属性", params_name: "element_form", colspan: 3,
+                    checkboxes: [{label: "物理", params_name: "is_physics",   class_name: "after_space"},
+                                 {label: "火", params_name: "is_fire",   class_name: "after_space"},
+                                 {label: "水", params_name: "is_aqua",  class_name: "after_space"},
+                                 {label: "風", params_name: "is_wind",   class_name: "after_space", br: true},
+                                 {label: "地", params_name: "is_quake", class_name: "after_space"},
+                                 {label: "光", params_name: "is_light",  class_name: "after_space"},
+                                 {label: "闇", params_name: "is_dark",   class_name: "after_space"}])
+
+    - #==========================================================================================================================
+    - tbody_toggle(@form_params, params_name: "show_skill_text",
+                    label: {open: "スキルの説明を表示する", close: "スキルの説明を表示しない"}, base_first: false)
+    %tbody.closed
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "説明", params_name: "text_form", placeholder: "SkillText", colspan: 3)
+
+    - #==========================================================================================================================
+    - tbody_toggle(@form_params, params_name: "show_total",
+                    label: {open: "スキル別習得者数を表示する", close: "スキル別習得者数を表示しない"}, base_first: false)
+    %tbody.closed
+      %tr.sep
+        %td.indent
+        %td{colspan: 5}
+
+    - #==========================================================================================================================
+    %tbody
+      %tr.sep
+        %td.indent
+        %td.indent= hidden_field_tag :is_form, 1
+        %td{colspan: "3"}
+          - search_submit_button
+
+= paginate(@skills)
+%br
+ヒット数：#{ @count }件
+%br
+%br
+
+%table.table.table-striped.table-bordered.table-hover
+  %thead
+    %tr
+      %th= sort_link(@search, :result_no,"大会", default_order: :desc)
+      %th= sort_link(@search, :round_no,"回戦", default_order: :desc)
+      - if @form_params["show_total"] != "1"
+        %th= sort_link(@search, :link_no,"キャラクター[ID]", default_order: :desc)
+      %th.sep= sort_link(@search, :skill_type, "種類", default_order: :desc)
+      %th= sort_link(@search, :skill_id, "スキル", default_order: :desc)
+      %th= sort_link(@search, :skill_ap, "AP", default_order: :desc)
+      -if @form_params["show_skill_text"] == "1"
+        %th= sort_link(@search, :skill_text, "説明", default_order: :desc)
+      - if @form_params["show_total"] == "1"
+        %th.sep= sort_link(@search, :user_count, ex_sort_text(params, "user_count", "習得者数"), default_order: :desc)
+        %th= sort_link(@search, :user_count, ex_sort_text(params, "user_count", "習得割合"), default_order: :desc)
+      - if @form_params["show_total"] != "1"
+        %th.sep{colspan: "2"} 結果リンク
+  %tbody
+    - @skills.each do |skill|
+      %tr
+        %td= skill.result_no
+        %td= skill.round_no
+        - if @form_params["show_total"] != "1"
+          %td= pc_name_text(skill.link_no, skill.pc_name)
+        %td.sep= skill_type_text(skill.skill.skill_type) if skill.skill
+        %td= skill.skill.name if skill.skill
+        %td= skill.skill.ap if skill.skill.ap >= 0
+        -if @form_params["show_skill_text"] == "1"
+          %td= skill.skill.text
+        - if @form_params["show_total"] == "1"
+          %td.text-nowrap.sep= skill.user_count
+          %td= skill_rate_text(skill, @maxes)
+        - if @form_params["show_total"] != "1"
+          %td.sep= character_link(skill.result_no, skill.round_no, skill.link_no)
+= paginate(@skills)

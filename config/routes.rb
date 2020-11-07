@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  resources :skill_concatenates
+  resources :skills
+  resources :skill_lists
+  resources :uploaded_checks
+  resources :proper_names
   resources :names
   get "privacy", :to => "top_page#privacy", :as => "privacy"
   root 'top_page#index'

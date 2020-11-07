@@ -1,0 +1,2 @@
+class SkillList < ApplicationRecord
+end
