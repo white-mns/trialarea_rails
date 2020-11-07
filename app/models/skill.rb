@@ -3,7 +3,7 @@ class Skill < ApplicationRecord
   belongs_to :skill, :foreign_key => [:result_no, :skill_id], :primary_key => [:result_no, :skill_id], :class_name => "SkillList"
 
   scope :groups, ->(params) {
-    if params["show_total"] == "1" then
+    if params["show_total"] == "1"
       group("skills.result_no").
       group("skills.round_no").
       group("skills.skill_id")
@@ -11,7 +11,7 @@ class Skill < ApplicationRecord
   }
 
   scope :aggregations, ->(params) {
-    if params["show_total"] == "1" then
+    if params["show_total"] == "1"
       select("*").
       select("COUNT(skills.id) AS user_count")
     end
@@ -19,11 +19,11 @@ class Skill < ApplicationRecord
 
   scope :having_order, ->(params) {
     ex_sorts = {"user_count desc" => 1}
-    if !params[:q][:s] then
+    if !params[:q][:s]
       params["ex_sort_text"] = "user_count desc"
       return order("user_count desc")
 
-    elsif ex_sorts.has_key?(params[:q][:s]) then
+    elsif ex_sorts.has_key?(params[:q][:s])
       sort = params[:q][:s]
       params[:q].delete(:s)
       params["ex_sort"] = "on"
@@ -34,6 +34,6 @@ class Skill < ApplicationRecord
       params["ex_sort_text"] = ""
     end
 
-    nil
+    return nil
   }
 end
