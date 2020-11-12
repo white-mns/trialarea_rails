@@ -18,12 +18,19 @@ module ApplicationHelper
     end
   end
 
-  def pc_name_text(player_id, pc_name)
-    player_id_text = " [PL:" + sprintf("%d",player_id) + "]"
-    if pc_name then
-      pc_name.name.html_safe + player_id_text
-    else
-      player_id_text
+  def pc_name_text(pc_name)
+    unless pc_name then return end
+
+    result_no_text = sprintf("%d", pc_name.result_no + 1)
+    round_no_text = sprintf("%d", pc_name.round_no)
+    link_no_text = sprintf("%d", pc_name.link_no)
+
+    text = ""
+    player_id_text = " [PL:" + sprintf("%d", pc_name.player_id) + "]"
+
+    text = (pc_name) ? pc_name.name.html_safe + player_id_text : player_id_text
+    haml_tag :a, href: "http://133.130.112.98/trialarea/result_charalist/" + result_no_text + "/" + round_no_text + "#"+ link_no_text, target: "_blank" do
+      haml_concat text
     end
   end
 

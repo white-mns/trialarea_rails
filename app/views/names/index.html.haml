@@ -62,7 +62,8 @@
       %tr
         %td= name.result_no
         %td= name.round_no
-        %td= pc_name_text(name.player_id, name)
+        %td
+          - pc_name_text(name)
         %td= player_name_text(name.player_id, name)
         %td.sep= character_link(name.result_no, name.round_no, name.link_no)
 = paginate(@names)
