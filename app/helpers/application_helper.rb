@@ -18,12 +18,19 @@ module ApplicationHelper
     end
   end
 
-  def pc_name_text(player_id, pc_name)
-    player_id_text = " [PL:" + sprintf("%d",player_id) + "]"
-    if pc_name then
-      pc_name.name.html_safe + player_id_text
-    else
-      player_id_text
+  def pc_name_text(pc_name)
+    unless pc_name then return end
+
+    result_no_text = sprintf("%d", pc_name.result_no + 1)
+    round_no_text = sprintf("%d", pc_name.round_no)
+    link_no_text = sprintf("%d", pc_name.link_no)
+
+    text = ""
+    player_id_text = " [PL:" + sprintf("%d", pc_name.player_id) + "]"
+
+    text = (pc_name) ? pc_name.name.html_safe + player_id_text : player_id_text
+    haml_tag :a, href: "http://133.130.112.98/trialarea/result_charalist/" + result_no_text + "/" + round_no_text + "#"+ link_no_text, target: "_blank" do
+      haml_concat text
     end
   end
 
@@ -39,12 +46,24 @@ module ApplicationHelper
   def character_link(result_no, round_no, link_no)
     if link_no <= 0 then return end
 
-    result_no_text = sprintf("%d",result_no + 1)
-    round_no_text = sprintf("%d",round_no)
-    link_no_text = sprintf("%d",link_no)
+    result_no_text = sprintf("%d", result_no + 1)
+    round_no_text = sprintf("%d", round_no)
+    link_no_text = sprintf("%d", link_no)
 
     link_to " キャラクター", "http://133.130.112.98/trialarea/result_charalist/" + result_no_text + "/" + round_no_text + "#"+ link_no_text, :target => "_blank"
   end
+
+  def battle_link(battle_no, page_type)
+    if battle_no <= 0 then return end
+
+    battle_no_text = sprintf("%d", battle_no)
+    page_type_text = sprintf("%d", page_type)
+
+    link_text = (page_type == 1) ? "動的" : (page_type == 2) ? "フラット" : (page_type == 3) ? "コメント付" : "";
+
+    link_to link_text, "http://133.130.112.98/trialarea/battle/" + battle_no_text + "/" + page_type_text, :target => "_blank"
+  end
+
 
   def search_submit_button()
     haml_tag :button, class: "btn btn-outline-search", type: "submit" do
@@ -167,6 +186,15 @@ module ApplicationHelper
     elsif skill_type == 1 then return "アビリティ"
     elsif skill_type == 2 then return "覚醒"
     else return ""
+    end
+  end
+
+  def skill_concatenate_text(text)
+    skill_array = text.split(",")
+    skill_array.each do |skill_name|
+        if skill_name == "" then next end
+        haml_concat skill_name
+        haml_tag :br
     end
   end
 end

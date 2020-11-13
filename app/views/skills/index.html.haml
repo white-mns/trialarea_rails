@@ -117,7 +117,8 @@
         %td= skill.result_no
         %td= skill.round_no
         - if @form_params["show_total"] != "1"
-          %td= pc_name_text(skill.link_no, skill.pc_name)
+          %td.pc_name
+            - pc_name_text(skill.pc_name)
         %td.sep= skill_type_text(skill.skill.skill_type) if skill.skill
         %td= skill.skill.name if skill.skill
         %td= skill.skill.ap if skill.skill.ap >= 0

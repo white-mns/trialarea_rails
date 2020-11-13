@@ -82,7 +82,8 @@
       %tr
         %td= skill_concatenate.result_no
         %td= skill_concatenate.round_no
-        %td= pc_name_text(skill_concatenate.link_no, skill_concatenate.pc_name)
+        %td.pc_name
+          - pc_name_text(skill_concatenate.pc_name)
         %td
           - skill_concatenate_text(skill_concatenate.skill_concatenate)
         %td.sep= character_link(skill_concatenate.result_no, skill_concatenate.round_no, skill_concatenate.link_no)

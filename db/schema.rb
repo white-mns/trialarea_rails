@@ -10,7 +10,57 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_07_015024) do
+ActiveRecord::Schema.define(version: 2020_11_13_033042) do
+
+  create_table "all_use_skills", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+    t.integer "result_no"
+    t.integer "round_no"
+    t.integer "battle_no"
+    t.string "skill_concatenate"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["result_no", "round_no", "battle_no"], name: "resultno_battleno"
+  end
+
+  create_table "chara_use_skills", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+    t.integer "result_no"
+    t.integer "round_no"
+    t.integer "battle_no"
+    t.integer "link_no"
+    t.string "skill_concatenate"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["result_no", "round_no", "battle_no", "link_no"], name: "resultno_battleno_linkno"
+    t.index ["result_no", "round_no", "link_no"], name: "resultno_linkno"
+  end
+
+  create_table "matchings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+    t.integer "result_no"
+    t.integer "round_no"
+    t.integer "battle_no"
+    t.integer "left_link_no"
+    t.integer "right_link_no"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["result_no", "round_no", "battle_no"], name: "resultno_battleno"
+    t.index ["result_no", "round_no", "left_link_no"], name: "resultno_leftlinkeno"
+    t.index ["result_no", "round_no", "right_link_no"], name: "resultno_rightlinkeno"
+  end
+
+  create_table "name_dummies", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+    t.integer "result_no"
+    t.integer "round_no"
+    t.integer "player_id"
+    t.integer "link_no"
+    t.string "name"
+    t.string "player"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["result_no", "round_no", "link_no"], name: "resultno_linkno"
+    t.index ["result_no", "round_no", "name"], name: "resultno_name"
+    t.index ["result_no", "round_no", "player"], name: "resultno_player"
+    t.index ["result_no", "round_no", "player_id"], name: "resultno_playerid"
+  end
 
   create_table "names", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
     t.integer "result_no"

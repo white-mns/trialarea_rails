@@ -202,6 +202,10 @@ td.sign{
     font-size: x-large;
 }
 
+td.pc_name{
+    max-width: 16rem;
+}
+
 th.sep,td.sep{
     border-left: 3px solid $table-border-color;
 }
