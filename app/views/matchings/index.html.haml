@@ -68,14 +68,14 @@
       %tr
         %td= matching.result_no
         %td= matching.round_no
-        %td
+        %td.pc_name
           - pc_name_text(matching.left_pc_name)
         %td
           - skill_concatenate_text(matching.left_skills.skill_concatenate)
         %td VS
         %td
           - skill_concatenate_text(matching.right_skills.skill_concatenate)
-        %td
+        %td.pc_name
           - pc_name_text(matching.right_pc_name)
         %td.sep= battle_link(matching.battle_no, 1)
         %td= battle_link(matching.battle_no, 3)
