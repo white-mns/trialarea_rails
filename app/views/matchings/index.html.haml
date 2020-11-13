@@ -36,6 +36,9 @@
         %td.indent
         - td_form(f, @form_params, @placeholder, class_name: "formText", label: "プレイヤー", params_name: "player_form")
         - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "ID", params_name: "player_id_form")
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "スキル組み合わせ", params_name: "skill_concatenate_form", placeholder: "Skill", colspan: 3)
       %tr.sep
         %td.indent
         %td.indent= hidden_field_tag :is_form, 1
@@ -55,7 +58,9 @@
       %th= sort_link(@search, :result_no,"大会", default_order: :desc)
       %th= sort_link(@search, :round_no,"回戦", default_order: :desc)
       %th= sort_link(@search, :left_link_no,"キャラクター[ID]", default_order: :desc)
+      %th 習得スキル
       %th
+      %th 習得スキル
       %th= sort_link(@search, :right_link_no,"キャラクター[ID]", default_order: :desc)
       %th.sep{colspan: "3"} 結果リンク
   %tbody
@@ -65,7 +70,11 @@
         %td= matching.round_no
         %td
           - pc_name_text(matching.left_pc_name)
+        %td
+          - skill_concatenate_text(matching.left_skills.skill_concatenate)
         %td VS
+        %td
+          - skill_concatenate_text(matching.right_skills.skill_concatenate)
         %td
           - pc_name_text(matching.right_pc_name)
         %td.sep= battle_link(matching.battle_no, 1)

@@ -8,8 +8,8 @@ class MatchingsController < ApplicationController
     placeholder_set
     param_set
 
-    @count  = Matching.notnil().includes(:left_pc_name, :right_pc_name).search(params[:q]).result.hit_count()
-    @search = Matching.notnil().includes(:left_pc_name, :right_pc_name).page(params[:page]).search(params[:q])
+    @count  = Matching.notnil().includes(:left_pc_name, :right_pc_name, :left_skills, :right_skills).search(params[:q]).result.hit_count()
+    @search = Matching.notnil().includes(:left_pc_name, :right_pc_name, :left_skills, :right_skills).page(params[:page]).search(params[:q])
     @search.sorts = "id asc" if @search.sorts.empty?
     @matchings = @search.result.per(50)
   end
@@ -31,6 +31,8 @@ class MatchingsController < ApplicationController
     params_to_form(params, @form_params, column_name: "battle_no", params_name: "battle_no_form", type: "number")
     params_to_form(params, @form_params, column_name: "left_link_no", params_name: "left_link_no_form", type: "number")
     params_to_form(params, @form_params, column_name: "right_link_no", params_name: "right_link_no_form", type: "number")
+
+    params_to_form(params, @form_params, column_name: "left_searchs_skill_concatenate_or_right_searchs_skill_concatenate",  params_name: "skill_concatenate_form", type: "concat")
 
     toggle_params_to_variable(params, @form_params, params_name: "show_data")
   end
