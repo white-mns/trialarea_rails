@@ -1,0 +1,2 @@
+class AllUseSkill < ApplicationRecord
+end

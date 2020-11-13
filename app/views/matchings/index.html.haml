@@ -9,6 +9,10 @@
   .card-body
     = render "layouts/base_desc"
     %p
+      (※1)習得スキルで「アタック 回避」とAND検索をすると、アタックと回避を両方習得しているキャラクターで絞り込むことが出来ます。
+      %br
+      (※2)使用スキル(対戦全体)で「アタック 回避」とAND検索をすると、使用者を問わず戦闘中に「アタック」と「回避」が両方使われた戦闘結果で絞り込むことが出来ます。
+    %p
       %span.example_select.example_toggle.pointer
         - help_icon
         入力例
@@ -38,7 +42,10 @@
         - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "ID", params_name: "player_id_form")
       %tr
         %td.indent
-        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "スキル組み合わせ", params_name: "skill_concatenate_form", placeholder: "Skill", colspan: 3)
+        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "習得スキル ※1", params_name: "skill_concatenate_form", placeholder: "Skill", colspan: 3)
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "使用スキル(対戦全体) ※2", params_name: "all_use_skill_form", placeholder: "Skill", colspan: 3)
       %tr.sep
         %td.indent
         %td.indent= hidden_field_tag :is_form, 1

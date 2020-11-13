@@ -33,6 +33,7 @@ class MatchingsController < ApplicationController
     params_to_form(params, @form_params, column_name: "right_link_no", params_name: "right_link_no_form", type: "number")
 
     params_to_form(params, @form_params, column_name: "left_search_skills_skill_concatenate_or_right_search_skills_skill_concatenate",  params_name: "skill_concatenate_form", type: "concat")
+    params_to_form(params, @form_params, column_name: "all_use_skill_skill_concatenate",  params_name: "all_use_skill_form", type: "concat")
 
     toggle_params_to_variable(params, @form_params, params_name: "show_data")
   end

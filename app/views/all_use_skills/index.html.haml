@@ -1,0 +1,72 @@
+- @page_title = "試合全体使用スキル一覧"
+%h1= @page_title
+
+.card.desc
+  .card-header
+    - act_icon(true)
+    検索仕様
+    - act_desc(true)
+  .card-body
+    = render "layouts/base_desc"
+    %p
+      (※)使用スキル「アタック 回避」とAND検索をすると、使用者を問わず戦闘中にアタックと回避が両方使われた戦闘結果を絞り込むことが出来ます。
+    %p
+      %span.example_select.example_toggle.pointer
+        - help_icon
+        入力例
+        - act_desc(false)
+    #example.closed
+      = render "layouts/input_desc"
+= search_form_for @search do |f|
+  %table.search_toggle.table.table-striped.table-bordered.table-hover
+    %tbody.pointer
+      %tr
+        %td{colspan: "5"}
+          - act_icon(true)
+          絞り込み検索
+          - act_desc(true)
+    %tbody
+      %tr
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "大会", params_name: "result_no_form", placeholder: nil)
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "回戦", params_name: "round_no_form", placeholder: nil)
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "戦闘番号", params_name: "battle_no_form", placeholder: "Number", colspan: 3)
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "使用スキル(※)", params_name: "skill_concatenate_form", placeholder: "Skill", colspan: 3)
+      %tr.sep
+        %td.indent
+        %td.indent= hidden_field_tag :is_form, 1
+        %td{colspan: "3"}
+          - search_submit_button
+
+
+= paginate(@all_use_skills)
+%br
+ヒット数：#{ @count }件
+%br
+%br
+
+%table.table.table-striped.table-bordered.table-hover
+  %thead
+    %tr
+      %th= sort_link(@search, :result_no,"大会", default_order: :desc)
+      %th= sort_link(@search, :round_no,"回戦", default_order: :desc)
+      %th= sort_link(@search, :battle_no, "戦闘番号", default_order: :desc)
+      %th= sort_link(@search, :skill_concatenate, "使用スキル", default_order: :desc)
+      %th.sep{colspan: "3"} 結果リンク
+  %tbody
+    - @all_use_skills.each do |all_use_skill|
+      %tr
+        %td= all_use_skill.result_no
+        %td= all_use_skill.round_no
+        %td= all_use_skill.battle_no
+        %td
+          - skill_concatenate_text(all_use_skill.skill_concatenate)
+        %td.sep= battle_link(all_use_skill.battle_no, 1)
+        %td= battle_link(all_use_skill.battle_no, 3)
+        %td= battle_link(all_use_skill.battle_no, 2)
+= paginate(@all_use_skills)
