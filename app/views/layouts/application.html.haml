@@ -31,6 +31,12 @@
                 = link_to "習得スキル一覧", skills_path, class: "dropdown-item"
                 = link_to ">　スキル習得者数ランキング", skills_path + "?show_total=1&ex_sort=on", class: "dropdown-item"
                 = link_to "習得スキル組み合わせ一覧", skill_concatenates_path, class: "dropdown-item"
+            %li.nav-item.dropdown
+              %a.nav-link.dropdown-toggle#themes{ :data => {:toggle =>"dropdown"}, :href => "#"}
+                対戦データ
+                %span.caret
+              .dropdown-menu
+                = link_to "次回対戦組み合わせ一覧", matchings_path, class: "dropdown-item"
 
     .container
       .row

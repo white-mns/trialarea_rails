@@ -46,12 +46,24 @@ module ApplicationHelper
   def character_link(result_no, round_no, link_no)
     if link_no <= 0 then return end
 
-    result_no_text = sprintf("%d",result_no + 1)
-    round_no_text = sprintf("%d",round_no)
-    link_no_text = sprintf("%d",link_no)
+    result_no_text = sprintf("%d", result_no + 1)
+    round_no_text = sprintf("%d", round_no)
+    link_no_text = sprintf("%d", link_no)
 
     link_to " キャラクター", "http://133.130.112.98/trialarea/result_charalist/" + result_no_text + "/" + round_no_text + "#"+ link_no_text, :target => "_blank"
   end
+
+  def battle_link(battle_no, page_type)
+    if battle_no <= 0 then return end
+
+    battle_no_text = sprintf("%d", battle_no)
+    page_type_text = sprintf("%d", page_type)
+
+    link_text = (page_type == 1) ? "動的" : (page_type == 2) ? "フラット" : (page_type == 3) ? "コメント付" : "";
+
+    link_to link_text, "http://133.130.112.98/trialarea/battle/" + battle_no_text + "/" + page_type_text, :target => "_blank"
+  end
+
 
   def search_submit_button()
     haml_tag :button, class: "btn btn-outline-search", type: "submit" do
