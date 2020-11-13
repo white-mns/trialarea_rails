@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :name_dummies
   resources :matchings
   resources :skill_concatenates
   resources :skills
