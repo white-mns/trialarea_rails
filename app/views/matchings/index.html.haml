@@ -1,4 +1,7 @@
-- @page_title = "次回対戦組み合わせ一覧"
+- if @form_params["result_no_form"] == sprintf("%d",@latest_result) && @form_params["round_no_form"] == sprintf("%d",@latest_round) && @form_params["round_no_form"] != sprintf("%d",@latest_battle) 
+  - @page_title = "次回対戦組み合わせ一覧"
+- else
+  - @page_title = "対戦結果一覧"
 %h1= @page_title
 
 .card.desc
@@ -12,6 +15,8 @@
       (※1)習得スキルで「アタック 回避」とAND検索をすると、アタックと回避を両方習得しているキャラクターで絞り込むことが出来ます。
       %br
       (※2)使用スキル(対戦全体)で「アタック 回避」とAND検索をすると、使用者を問わず戦闘中に「アタック」と「回避」が両方使われた戦闘結果で絞り込むことが出来ます。
+      %br
+      (※2)使用スキル(キャラクター)で「アタック 回避」とAND検索をすると、片方のキャラクターが戦闘中に「アタック」と「回避」を両方使った戦闘結果で絞り込むことが出来ます。(なお、「キャラクターAがスキルAとBを使った結果」という絞り込み方は出来ません)
     %p
       %span.example_select.example_toggle.pointer
         - help_icon
@@ -45,7 +50,29 @@
         - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "習得スキル ※1", params_name: "skill_concatenate_form", placeholder: "Skill", colspan: 3)
       %tr
         %td.indent
-        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "使用スキル(対戦全体) ※2", params_name: "all_use_skill_form", placeholder: "Skill", colspan: 3)
+        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "使用スキル(戦闘全体) ※2", params_name: "all_use_skill_form", placeholder: "Skill", colspan: 3)
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "使用スキル(キャラクター) ※3", params_name: "chara_use_skill_form", placeholder: "Skill", colspan: 3)
+
+    - #==========================================================================================================================
+    - tbody_toggle(@form_params, params_name: "show_skill",
+                    label: {open: "習得スキルを表示する", close: "習得スキルを表示しない"}, base_first: true)
+    %tbody
+      %tr.sep
+        %td.indent
+        %td{colspan: 5}
+
+    - #==========================================================================================================================
+    - tbody_toggle(@form_params, params_name: "show_use_skill",
+                    label: {open: "使用スキルを表示する", close: "使用スキルを表示しない"}, base_first: true)
+    %tbody
+      %tr.sep
+        %td.indent
+        %td{colspan: 5}
+
+    - #==========================================================================================================================
+    %tbody
       %tr.sep
         %td.indent
         %td.indent= hidden_field_tag :is_form, 1
@@ -65,9 +92,15 @@
       %th= sort_link(@search, :result_no,"大会", default_order: :desc)
       %th= sort_link(@search, :round_no,"回戦", default_order: :desc)
       %th= sort_link(@search, :left_link_no,"キャラクター[ID]", default_order: :desc)
-      %th 習得スキル
+      -if @form_params["show_skill"] == "1"
+        %th 習得スキル
+      -if @form_params["show_use_skill"] == "1"
+        %th 使用スキル
       %th
-      %th 習得スキル
+      -if @form_params["show_use_skill"] == "1"
+        %th 使用スキル
+      -if @form_params["show_skill"] == "1"
+        %th 習得スキル
       %th= sort_link(@search, :right_link_no,"キャラクター[ID]", default_order: :desc)
       %th.sep{colspan: "3"} 結果リンク
   %tbody
@@ -77,11 +110,19 @@
         %td= matching.round_no
         %td.pc_name
           - pc_name_text(matching.left_pc_name)
-        %td
-          - skill_concatenate_text(matching.left_skills.skill_concatenate)
+        -if @form_params["show_skill"] == "1"
+          %td
+            - skill_concatenate_text(matching.left_skills.skill_concatenate) if matching.left_skills
+        -if @form_params["show_use_skill"] == "1"
+          %td
+            - skill_concatenate_text(matching.left_use_skills.skill_concatenate) if matching.left_use_skills
         %td VS
-        %td
-          - skill_concatenate_text(matching.right_skills.skill_concatenate)
+        -if @form_params["show_use_skill"] == "1"
+          %td
+            - skill_concatenate_text(matching.right_use_skills.skill_concatenate) if matching.right_use_skills
+        -if @form_params["show_skill"] == "1"
+          %td
+            - skill_concatenate_text(matching.right_skills.skill_concatenate) if matching.right_skills
         %td.pc_name
           - pc_name_text(matching.right_pc_name)
         %td.sep= battle_link(matching.battle_no, 1)

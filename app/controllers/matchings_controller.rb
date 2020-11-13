@@ -5,11 +5,12 @@ class MatchingsController < ApplicationController
   # GET /matchings
   def index
     resultno_set
+    @latest_battle = AllUseSkill.where(result_no: @latest_result).maximum("round_no")
     placeholder_set
     param_set
 
-    @count  = Matching.notnil().includes(:left_pc_name, :right_pc_name, :left_skills, :right_skills).search(params[:q]).result.hit_count()
-    @search = Matching.notnil().includes(:left_pc_name, :right_pc_name, :left_skills, :right_skills).page(params[:page]).search(params[:q])
+    @count  = Matching.notnil().includes(:left_pc_name, :right_pc_name, :left_skills, :right_skills, :left_use_skills, :right_use_skills).search(params[:q]).result.hit_count()
+    @search = Matching.notnil().includes(:left_pc_name, :right_pc_name, :left_skills, :right_skills, :left_use_skills, :right_use_skills).page(params[:page]).search(params[:q])
     @search.sorts = "id asc" if @search.sorts.empty?
     @matchings = @search.result.per(50)
   end
@@ -20,7 +21,7 @@ class MatchingsController < ApplicationController
     params_clean(params)
     unless params["is_form"]
       params["result_no_form"] ||= sprintf("%d",@latest_result)
-      params["round_no_form"] ||= sprintf("%d",@latest_round)
+      params["round_no_form"] ||= params["is_result"] == "on" ? sprintf("%d",@latest_battle) : sprintf("%d", @latest_round)
     end
 
     params_to_form(params, @form_params, column_name: "left_search_pc_name_name_or_right_search_pc_name_name",   params_name: "pc_name_form", type: "text")
@@ -33,9 +34,12 @@ class MatchingsController < ApplicationController
     params_to_form(params, @form_params, column_name: "right_link_no", params_name: "right_link_no_form", type: "number")
 
     params_to_form(params, @form_params, column_name: "left_search_skills_skill_concatenate_or_right_search_skills_skill_concatenate",  params_name: "skill_concatenate_form", type: "concat")
+    params_to_form(params, @form_params, column_name: "left_search_use_skills_skill_concatenate_or_right_search_use_skills_skill_concatenate",  params_name: "chara_use_skill_form", type: "concat")
     params_to_form(params, @form_params, column_name: "all_use_skill_skill_concatenate",  params_name: "all_use_skill_form", type: "concat")
 
-    toggle_params_to_variable(params, @form_params, params_name: "show_data")
+    toggle_params_to_variable(params, @form_params, params_name: "show_skill", first_opened: true)
+    toggle_params_to_variable(params, @form_params, params_name: "show_use_skill", first_opened: true)
+    @form_params["base_first"]    = (!params["is_form"]) ? "1" : "0"
   end
   # GET /matchings/1
   #def show

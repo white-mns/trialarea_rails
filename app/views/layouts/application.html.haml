@@ -37,6 +37,7 @@
                 %span.caret
               .dropdown-menu
                 = link_to "次回対戦組み合わせ一覧", matchings_path, class: "dropdown-item"
+                = link_to "対戦結果一覧", matchings_path + "?is_result=on", class: "dropdown-item"
 
     .container
       .row

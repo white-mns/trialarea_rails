@@ -25,15 +25,19 @@
           %li 対戦データ
           %ul
             %li= link_to "次回対戦組み合わせ一覧", matchings_path
+            %li= link_to "対戦結果一覧", matchings_path + "?is_result=on"
 
 .card.top
   .card-body
     %h2 更新履歴
     %ul
-      %li 2020/11/-
+      %li 2020/11/13
       %ul
         %li 
           = link_to "次回対戦組み合わせ一覧", matchings_path
+          を公開
+        %li 
+          = link_to "対戦結果一覧", matchings_path + "?is_result=on"
           を公開
       %li 2020/11/7
       %ul
