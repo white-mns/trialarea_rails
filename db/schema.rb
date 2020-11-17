@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_13_033042) do
+ActiveRecord::Schema.define(version: 2020_11_17_072247) do
 
   create_table "all_use_skills", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
     t.integer "result_no"
@@ -30,6 +30,8 @@ ActiveRecord::Schema.define(version: 2020_11_13_033042) do
     t.string "skill_concatenate"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "skill_concatenate_ex"
+    t.integer "seclusion_skill_id"
     t.index ["result_no", "round_no", "battle_no", "link_no"], name: "resultno_battleno_linkno"
     t.index ["result_no", "round_no", "link_no"], name: "resultno_linkno"
   end

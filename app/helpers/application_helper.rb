@@ -193,7 +193,14 @@ module ApplicationHelper
     skill_array = text.split(",")
     skill_array.each do |skill_name|
         if skill_name == "" then next end
-        haml_concat skill_name
+        if skill_name[0] == "!"
+            skill_name.slice!(0,1)
+            haml_tag :span, class: "font-weight-bold" do
+                haml_concat skill_name
+            end
+        else
+            haml_concat skill_name
+        end
         haml_tag :br
     end
   end

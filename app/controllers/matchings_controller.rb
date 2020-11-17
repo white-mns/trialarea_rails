@@ -9,8 +9,8 @@ class MatchingsController < ApplicationController
     placeholder_set
     param_set
 
-    @count  = Matching.notnil().includes(:left_pc_name, :right_pc_name, :left_skills, :right_skills, :left_use_skills, :right_use_skills).search(params[:q]).result.hit_count()
-    @search = Matching.notnil().includes(:left_pc_name, :right_pc_name, :left_skills, :right_skills, :left_use_skills, :right_use_skills).page(params[:page]).search(params[:q])
+    @count  = Matching.notnil().includes(:left_pc_name, :right_pc_name, :left_skills, :right_skills, [left_use_skills: :seclusion_skill], [right_use_skills: :seclusion_skill]).search(params[:q]).result.hit_count()
+    @search = Matching.notnil().includes(:left_pc_name, :right_pc_name, :left_skills, :right_skills, [left_use_skills: :seclusion_skill], [right_use_skills: :seclusion_skill]).page(params[:page]).search(params[:q])
     @search.sorts = "id asc" if @search.sorts.empty?
     @matchings = @search.result.per(50)
   end
@@ -36,6 +36,7 @@ class MatchingsController < ApplicationController
     params_to_form(params, @form_params, column_name: "left_search_skills_skill_concatenate_or_right_search_skills_skill_concatenate",  params_name: "skill_concatenate_form", type: "concat")
     params_to_form(params, @form_params, column_name: "left_search_use_skills_skill_concatenate_or_right_search_use_skills_skill_concatenate",  params_name: "chara_use_skill_form", type: "concat")
     params_to_form(params, @form_params, column_name: "all_use_skill_skill_concatenate",  params_name: "all_use_skill_form", type: "concat")
+    params_to_form(params, @form_params, column_name: "left_search_use_skills_seclusion_skill_name_or_right_search_use_skills_seclusion_skill_name",  params_name: "seclusion_skill_form", type: "text")
 
     toggle_params_to_variable(params, @form_params, params_name: "show_skill", first_opened: true)
     toggle_params_to_variable(params, @form_params, params_name: "show_use_skill", first_opened: true)
