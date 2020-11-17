@@ -8,8 +8,8 @@ class CharaUseSkillsController < ApplicationController
     placeholder_set
     param_set
 
-    @count  = CharaUseSkill.notnil().includes(:pc_name).search(params[:q]).result.hit_count()
-    @search = CharaUseSkill.notnil().includes(:pc_name).page(params[:page]).search(params[:q])
+    @count  = CharaUseSkill.notnil().includes(:pc_name, :seclusion_skill).search(params[:q]).result.hit_count()
+    @search = CharaUseSkill.notnil().includes(:pc_name, :seclusion_skill).page(params[:page]).search(params[:q])
     @search.sorts = "id asc" if @search.sorts.empty?
     @chara_use_skills = @search.result.per(50)
   end
@@ -30,6 +30,7 @@ class CharaUseSkillsController < ApplicationController
     params_to_form(params, @form_params, column_name: "battle_no", params_name: "battle_no_form", type: "number")
     params_to_form(params, @form_params, column_name: "link_no", params_name: "link_no_form", type: "number")
     params_to_form(params, @form_params, column_name: "skill_concatenate", params_name: "skill_concatenate_form", type: "concat")
+    params_to_form(params, @form_params, column_name: "seclusion_skill_name",  params_name: "seclusion_skill_form", type: "text")
 
     toggle_params_to_variable(params, @form_params, params_name: "show_data")
   end

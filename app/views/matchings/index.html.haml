@@ -45,31 +45,25 @@
         %td.indent
         - td_form(f, @form_params, @placeholder, class_name: "formText", label: "プレイヤー", params_name: "player_form")
         - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "ID", params_name: "player_id_form")
+
+    - #==========================================================================================================================
+    - tbody_toggle(@form_params, params_name: "show_skill",
+                    label: {open: "習得スキルを表示する", close: "習得スキルを表示しない"}, base_first: true)
+    %tbody
       %tr
         %td.indent
         - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "習得スキル ※1", params_name: "skill_concatenate_form", placeholder: "Skill", colspan: 3)
+
+    - #==========================================================================================================================
+    - tbody_toggle(@form_params, params_name: "show_use_skill",
+                    label: {open: "使用スキルを表示する", close: "使用スキルを表示しない"}, base_first: true)
+    %tbody
       %tr
         %td.indent
         - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "使用スキル(戦闘全体) ※2", params_name: "all_use_skill_form", placeholder: "Skill", colspan: 3)
       %tr
         %td.indent
         - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "使用スキル(キャラクター) ※3", params_name: "chara_use_skill_form", placeholder: "Skill", colspan: 3)
-
-    - #==========================================================================================================================
-    - tbody_toggle(@form_params, params_name: "show_skill",
-                    label: {open: "習得スキルを表示する", close: "習得スキルを表示しない"}, base_first: true)
-    %tbody
-      %tr.sep
-        %td.indent
-        %td{colspan: 5}
-
-    - #==========================================================================================================================
-    - tbody_toggle(@form_params, params_name: "show_use_skill",
-                    label: {open: "使用スキルを表示する", close: "使用スキルを表示しない"}, base_first: true)
-    %tbody
-      %tr.sep
-        %td.indent
-        %td{colspan: 5}
 
     - #==========================================================================================================================
     %tbody
@@ -115,11 +109,11 @@
             - skill_concatenate_text(matching.left_skills.skill_concatenate) if matching.left_skills
         -if @form_params["show_use_skill"] == "1"
           %td
-            - skill_concatenate_text(matching.left_use_skills.skill_concatenate) if matching.left_use_skills
+            - skill_concatenate_text(matching.left_use_skills.skill_concatenate_ex) if matching.left_use_skills
         %td VS
         -if @form_params["show_use_skill"] == "1"
           %td
-            - skill_concatenate_text(matching.right_use_skills.skill_concatenate) if matching.right_use_skills
+            - skill_concatenate_text(matching.right_use_skills.skill_concatenate_ex) if matching.right_use_skills
         -if @form_params["show_skill"] == "1"
           %td
             - skill_concatenate_text(matching.right_skills.skill_concatenate) if matching.right_skills

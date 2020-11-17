@@ -31,6 +31,18 @@
   .card-body
     %h2 更新履歴
     %ul
+      %li 2020/11/17
+      %ul
+        %li 
+          = link_to "習得スキル組み合わせ一覧", skill_concatenates_path
+          に非公開スキルとその位置を追加
+        %li 
+          = link_to "対戦結果一覧", matchings_path + "?is_result=on"
+          %ul
+            %li 
+              スキル使用回数を表示
+            %li
+              使用スキルで非公開スキルだったものを太字で表示
       %li 2020/11/13
       %ul
         %li 

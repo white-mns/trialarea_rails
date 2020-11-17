@@ -44,6 +44,9 @@
       %tr
         %td.indent
         - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "使用スキル(※)", params_name: "skill_concatenate_form", placeholder: "Skill", colspan: 3)
+      %tr
+        %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "非公開スキル", params_name: "seclusion_skill_form", placeholder: "Skill", colspan: 3)
       %tr.sep
         %td.indent
         %td.indent= hidden_field_tag :is_form, 1
@@ -65,6 +68,7 @@
       %th= sort_link(@search, :link_no,"キャラクター[ID]", default_order: :desc)
       %th= sort_link(@search, :battle_no, "戦闘番号", default_order: :desc)
       %th= sort_link(@search, :skill_concatenate, "使用スキル", default_order: :desc)
+      %th= sort_link(@search, :seclusion_skill_id, "非公開スキル", default_order: :desc)
       %th.sep{colspan: "3"} 結果リンク
   %tbody
     - @chara_use_skills.each do |chara_use_skill|
@@ -75,7 +79,8 @@
           - pc_name_text(chara_use_skill.pc_name)
         %td= chara_use_skill.battle_no
         %td
-          - skill_concatenate_text(chara_use_skill.skill_concatenate)
+          - skill_concatenate_text(chara_use_skill.skill_concatenate_ex)
+        %td= chara_use_skill.seclusion_skill.name if chara_use_skill.seclusion_skill
         %td.sep= battle_link(chara_use_skill.battle_no, 1)
         %td= battle_link(chara_use_skill.battle_no, 3)
         %td= battle_link(chara_use_skill.battle_no, 2)
