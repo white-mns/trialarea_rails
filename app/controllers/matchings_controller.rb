@@ -6,6 +6,9 @@ class MatchingsController < ApplicationController
   def index
     resultno_set
     @latest_battle = AllUseSkill.where(result_no: @latest_result).maximum("round_no")
+    unless @latest_battle
+        @latest_battle = 0
+    end
     placeholder_set
     param_set
 
