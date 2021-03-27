@@ -1,0 +1,57 @@
+%h2.h2_decoration
+  試行領域のシミュレーター画面から整理用スプレッドシートの形式に出力する自分用スクリプト
+%img{width:"50%", src:"https://data.teiki.org/trialarea/img/trialarea_export_ex_script_1.png"}
+%br
+%br
+
+%h4.h4_decoration
+  ユーザースクリプト
+= link_to "ユーザースクリプト", "https://data.teiki.org/trialarea/TrialareaSimulatorExportEX.user.js"
+%br
+試行領域のシミュレート結果を私個人が保存・整理しやすくするために作ったスクリプトです。
+%br
+もしかすると他の人の役に立つかもしれない……ということで公開します。個人用なので突然仕様が変わったりするかもしれません。
+%br
+%br
+%p
+  %span.example_select.example_toggle.pointer
+    - help_icon
+    使い方
+    - act_desc(false)
+#example.closed
+  １．
+  = link_to "Tampermonkey", "https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo"
+  もしくは
+  = link_to "Greasemonkey", "https://addons.mozilla.org/ja/firefox/addon/greasemonkey/"
+  をブラウザにインストールします。
+  %br
+  （FireFoxではGreasemonkey、Google ChromeとEdgeではTampermonkeyをインストールします）
+
+  %br
+  ２．
+  = link_to "ユーザースクリプトのURL", "https://data.teiki.org/trialarea/TrialareaSimulatorExportEX.user.js"
+  を開いてスクリプトインストールします。
+  %br
+  %img{width:"50%", src:"https://data.teiki.org/trialarea/img/trialarea_export_ex_script_2.png"}
+  %br
+  ３．スクリプトをインストールした後に、「
+  = link_to "シミュレーター", "http://133.130.112.98/trialarea/simulator"
+  」ページを開くと、フォローリストの上に「データ小屋スクリプト追加項目」という囲いの中に「キャラ○設定文字列取得」というボタンが追加されるようになります。ボタンをクリックするとキャラ1もしくはキャラ2の設定がタブ区切りで連結された文字列が表示されます。文字列をクリックすると全選択になるので、それをコピーします。
+  %br
+  %img{width:"25%", src:"https://data.teiki.org/trialarea/img/trialarea_export_ex_script_3.png"}
+  %br
+  %br
+  %img{width:"50%", src:"https://data.teiki.org/trialarea/img/trialarea_export_ex_script_4.png"}
+  %br
+  ４．エクセルやスプレッドシートに貼り付けると管理がしやすくなります。
+  %br
+  %img{width:"50%", src:"https://data.teiki.org/trialarea/img/trialarea_export_ex_script_5.png"}
+  %br
+  ５．「総当りシミュ」の列をコピーして、総当たりシミュレーターのplayer.txtに貼り付けると総当りシミュレーターの対象が一度に貼り付けられます。
+  %br
+  %img{width:"50%", src:"https://data.teiki.org/trialarea/img/trialarea_export_ex_script_6.png"}
+  %br
+%br
+%br
+
+
