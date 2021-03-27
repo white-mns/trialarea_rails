@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :uploaded_checks
   resources :proper_names
   resources :names
+  get 'script', :to => "top_page#script", :as => "top_page_script"
   get "privacy", :to => "top_page#privacy", :as => "privacy"
   root 'top_page#index'
 
