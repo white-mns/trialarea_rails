@@ -2,8 +2,8 @@
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
 #
-# This file is the source Rails uses to define your schema when running `rails
-# db:schema:load`. When creating a new database, `rails db:schema:load` tends to
+# This file is the source Rails uses to define your schema when running `bin/rails
+# db:schema:load`. When creating a new database, `bin/rails db:schema:load` tends to
 # be faster and is potentially less error prone than running all of your
 # migrations from scratch. Old migrations may fail to apply correctly if those
 # migrations use external dependencies or application code.
@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2020_11_17_072247) do
 
-  create_table "all_use_skills", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+  create_table "all_use_skills", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.integer "result_no"
     t.integer "round_no"
     t.integer "battle_no"
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 2020_11_17_072247) do
     t.index ["result_no", "round_no", "battle_no"], name: "resultno_battleno"
   end
 
-  create_table "chara_use_skills", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+  create_table "chara_use_skills", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.integer "result_no"
     t.integer "round_no"
     t.integer "battle_no"
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 2020_11_17_072247) do
     t.index ["result_no", "round_no", "link_no"], name: "resultno_linkno"
   end
 
-  create_table "matchings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+  create_table "matchings", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.integer "result_no"
     t.integer "round_no"
     t.integer "battle_no"
@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 2020_11_17_072247) do
     t.index ["result_no", "round_no", "right_link_no"], name: "resultno_rightlinkeno"
   end
 
-  create_table "name_dummies", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+  create_table "name_dummies", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.integer "result_no"
     t.integer "round_no"
     t.integer "player_id"
@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(version: 2020_11_17_072247) do
     t.index ["result_no", "round_no", "player_id"], name: "resultno_playerid"
   end
 
-  create_table "names", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+  create_table "names", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.integer "result_no"
     t.integer "round_no"
     t.integer "player_id"
@@ -79,7 +79,7 @@ ActiveRecord::Schema.define(version: 2020_11_17_072247) do
     t.index ["result_no", "round_no", "player_id"], name: "resultno_playerid"
   end
 
-  create_table "proper_names", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+  create_table "proper_names", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.integer "proper_id"
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -88,7 +88,7 @@ ActiveRecord::Schema.define(version: 2020_11_17_072247) do
     t.index ["proper_id"], name: "index_proper_names_on_proper_id"
   end
 
-  create_table "skill_concatenates", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+  create_table "skill_concatenates", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.integer "result_no"
     t.integer "round_no"
     t.integer "link_no"
@@ -98,7 +98,7 @@ ActiveRecord::Schema.define(version: 2020_11_17_072247) do
     t.index ["result_no", "round_no", "link_no"], name: "resultno_linkno"
   end
 
-  create_table "skill_lists", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+  create_table "skill_lists", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.integer "skill_id"
     t.string "name"
     t.integer "result_no"
@@ -131,7 +131,7 @@ ActiveRecord::Schema.define(version: 2020_11_17_072247) do
     t.index ["skill_type"], name: "index_skill_lists_on_skill_type"
   end
 
-  create_table "skills", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+  create_table "skills", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.integer "result_no"
     t.integer "round_no"
     t.integer "link_no"
@@ -142,7 +142,7 @@ ActiveRecord::Schema.define(version: 2020_11_17_072247) do
     t.index ["result_no", "skill_id"], name: "resultno_skillid"
   end
 
-  create_table "uploaded_checks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin", force: :cascade do |t|
+  create_table "uploaded_checks", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.integer "result_no"
     t.integer "round_no"
     t.datetime "created_at", precision: 6, null: false

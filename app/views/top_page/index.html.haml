@@ -1,7 +1,7 @@
-%h1 試行領域データ小屋
+%h1= site_title
 %p
   このサイトでは『
-  %a{:href => "http://133.130.112.98/trialarea/", :target => "_blank"} 試行領域
+  %a{:href => "https://gameokiba.com/trialandscheme/", :target => "_blank"} 試行策謀
   』を解析して得られる情報を扱っています。
 %br
 %p= top_text(@latest_result, @latest_round, @uploaded_result)
@@ -26,36 +26,11 @@
           %ul
             %li= link_to "次回対戦組み合わせ一覧", matchings_path
             %li= link_to "対戦結果一覧", matchings_path + "?is_result=on"
-      .col-md-6
-        %ul
-          %li スクリプト
-          %ul
-            %li= link_to "シミュレート内容の整理用出力スクリプト", top_page_script_path
 
 .card.top
   .card-body
     %h2 更新履歴
     %ul
-      %li 2020/11/17
-      %ul
-        %li 
-          = link_to "習得スキル組み合わせ一覧", skill_concatenates_path
-          に非公開スキルとその位置を追加
-        %li 
-          = link_to "対戦結果一覧", matchings_path + "?is_result=on"
-          %ul
-            %li 
-              スキル使用回数を表示
-            %li
-              使用スキルで非公開スキルだったものを太字で表示
-      %li 2020/11/13
-      %ul
-        %li 
-          = link_to "次回対戦組み合わせ一覧", matchings_path
-          を公開
-        %li 
-          = link_to "対戦結果一覧", matchings_path + "?is_result=on"
-          を公開
-      %li 2020/11/7
+      %li 2021/10/10
       %ul
         %li サイト公開

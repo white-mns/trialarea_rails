@@ -1,6 +1,11 @@
 module ApplicationHelper
+  def site_title
+    title = "試行策謀データ小屋"
+    title
+  end
+
   def page_title
-    title = "試行領域データ小屋"
+    title = site_title
     title = @page_title + " | " + title if @page_title
     title
   end
