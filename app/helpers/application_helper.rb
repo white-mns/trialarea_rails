@@ -29,7 +29,7 @@ module ApplicationHelper
     player_id_text = " [PL:" + sprintf("%d", pc_name.player_id) + "]"
 
     text = (pc_name) ? pc_name.name.html_safe + player_id_text : player_id_text
-    haml_tag :a, href: "http://133.130.112.98/trialarea/result_charalist/" + result_no_text + "/" + round_no_text + "#"+ link_no_text, target: "_blank" do
+    haml_tag :a, href: "https://gameokiba.com/trialarea/result_charalist/" + result_no_text + "/" + round_no_text + "#"+ link_no_text, target: "_blank" do
       haml_concat text
     end
   end
@@ -50,7 +50,7 @@ module ApplicationHelper
     round_no_text = sprintf("%d", round_no)
     link_no_text = sprintf("%d", link_no)
 
-    link_to " キャラクター", "http://133.130.112.98/trialarea/result_charalist/" + result_no_text + "/" + round_no_text + "#"+ link_no_text, :target => "_blank"
+    link_to " キャラクター", "https://gameokiba.com/trialarea/result_charalist/" + result_no_text + "/" + round_no_text + "#"+ link_no_text, :target => "_blank"
   end
 
   def battle_link(battle_no, page_type)
@@ -61,7 +61,7 @@ module ApplicationHelper
 
     link_text = (page_type == 1) ? "動的" : (page_type == 2) ? "フラット" : (page_type == 3) ? "コメント付" : "";
 
-    link_to link_text, "http://133.130.112.98/trialarea/battle/" + battle_no_text + "/" + page_type_text, :target => "_blank"
+    link_to link_text, "https://gameokiba.com/trialarea/battle/" + battle_no_text + "/" + page_type_text, :target => "_blank"
   end
 
 
