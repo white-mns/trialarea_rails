@@ -2,7 +2,11 @@
 %p
   このサイトでは『
   %a{:href => "http://133.130.112.98/trialarea/", :target => "_blank"} 試行領域
-  』を解析して得られる情報を扱っています。
+  』を解析して得られる情報を扱っていました。
+  %br
+  ゲームは運営終了し、データ小屋では全結果から取得したデータを残しています。
+%p{style: "font-size:x-large;"}
+  = link_to "⇒次ゲーム：試行策謀データ小屋", "https://data.teiki.org/trialandscheme/"
 %br
 %p= top_text(@latest_result, @latest_round, @uploaded_result)
 
