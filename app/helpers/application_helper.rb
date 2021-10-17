@@ -64,7 +64,7 @@ module ApplicationHelper
     battle_no_text = sprintf("%d", battle_no)
     page_type_text = sprintf("%d", page_type)
 
-    link_text = (page_type == 1) ? "動的" : (page_type == 2) ? "フラット" : (page_type == 3) ? "コメント付" : "";
+    link_text = (page_type == 1) ? "対戦結果表示" : (page_type == 2) ? "ログのみ" : (page_type == 3) ? "コメント付" : "";
 
     link_to link_text, "https://gameokiba.com/trialandscheme/battle/" + battle_no_text + "/" + page_type_text, :target => "_blank"
   end

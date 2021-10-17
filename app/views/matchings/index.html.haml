@@ -96,7 +96,7 @@
       -if @form_params["show_skill"] == "1"
         %th 習得スキル
       %th= sort_link(@search, :right_link_no,"キャラクター[ID]", default_order: :desc)
-      %th.sep{colspan: "3"} 結果リンク
+      %th.sep{colspan: "2"} 結果リンク
   %tbody
     - @matchings.each do |matching|
       %tr
@@ -120,6 +120,5 @@
         %td.pc_name
           - pc_name_text(matching.right_pc_name)
         %td.sep= battle_link(matching.battle_no, 1)
-        %td= battle_link(matching.battle_no, 3)
         %td= battle_link(matching.battle_no, 2)
 = paginate(@matchings)
