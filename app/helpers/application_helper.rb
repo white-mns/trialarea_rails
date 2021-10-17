@@ -200,7 +200,7 @@ module ApplicationHelper
         if skill_name == "" then next end
         if skill_name[0] == "!"
             skill_name.slice!(0,1)
-            haml_tag :span, class: "font-weight-bold" do
+            haml_tag :span, class: "fw-bold" do
                 haml_concat skill_name
             end
         else
