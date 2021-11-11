@@ -6,8 +6,4 @@ class Matching < ApplicationRecord
   belongs_to :all_use_skill, :foreign_key => [:result_no, :round_no, :battle_no],  :primary_key => [:result_no, :round_no, :battle_no], :class_name => "AllUseSkill"
   belongs_to :left_use_skills,  :foreign_key => [:result_no, :round_no, :left_link_no],  :primary_key => [:result_no, :round_no, :link_no], :class_name => "CharaUseSkill"
   belongs_to :right_use_skills, :foreign_key => [:result_no, :round_no, :right_link_no], :primary_key => [:result_no, :round_no, :link_no], :class_name => "CharaUseSkill"
-
-  # Ransack issue #1119 のエラー回避用
-  belongs_to :left_search,  :foreign_key => [:result_no, :round_no, :left_link_no],  :primary_key => [:result_no, :round_no, :link_no], :class_name => "NameDummy"
-  belongs_to :right_search, :foreign_key => [:result_no, :round_no, :right_link_no], :primary_key => [:result_no, :round_no, :link_no], :class_name => "NameDummy"
 end
