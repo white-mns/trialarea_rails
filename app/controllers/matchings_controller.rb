@@ -27,19 +27,19 @@ class MatchingsController < ApplicationController
       params["round_no_form"] ||= params["is_result"] == "on" ? sprintf("%d",@latest_battle) : sprintf("%d", @latest_round)
     end
 
-    params_to_form(params, @form_params, column_name: "left_search_pc_name_name_or_right_search_pc_name_name",   params_name: "pc_name_form", type: "text")
-    params_to_form(params, @form_params, column_name: "left_search_pc_name_player_or_right_search_pc_name_player", params_name: "player_form",  type: "text")
-    params_to_form(params, @form_params, column_name: "left_search_pc_name_player_id_or_right_search_pc_name_player_id", params_name: "player_id_form",  type: "number")
+    params_to_form(params, @form_params, column_name: "left_pc_name_name_or_right_pc_name_name",   params_name: "pc_name_form", type: "text")
+    params_to_form(params, @form_params, column_name: "left_pc_name_player_or_right_pc_name_player", params_name: "player_form",  type: "text")
+    params_to_form(params, @form_params, column_name: "left_pc_name_player_id_or_right_pc_name_player_id", params_name: "player_id_form",  type: "number")
     params_to_form(params, @form_params, column_name: "result_no", params_name: "result_no_form", type: "number")
     params_to_form(params, @form_params, column_name: "round_no", params_name: "round_no_form", type: "number")
     params_to_form(params, @form_params, column_name: "battle_no", params_name: "battle_no_form", type: "number")
     params_to_form(params, @form_params, column_name: "left_link_no", params_name: "left_link_no_form", type: "number")
     params_to_form(params, @form_params, column_name: "right_link_no", params_name: "right_link_no_form", type: "number")
 
-    params_to_form(params, @form_params, column_name: "left_search_skills_skill_concatenate_or_right_search_skills_skill_concatenate",  params_name: "skill_concatenate_form", type: "concat")
-    params_to_form(params, @form_params, column_name: "left_search_use_skills_skill_concatenate_or_right_search_use_skills_skill_concatenate",  params_name: "chara_use_skill_form", type: "concat")
+    params_to_form(params, @form_params, column_name: "left_skills_skill_concatenate_or_right_skills_skill_concatenate",  params_name: "skill_concatenate_form", type: "concat")
+    params_to_form(params, @form_params, column_name: "left_use_skills_skill_concatenate_or_right_use_skills_skill_concatenate",  params_name: "chara_use_skill_form", type: "concat")
     params_to_form(params, @form_params, column_name: "all_use_skill_skill_concatenate",  params_name: "all_use_skill_form", type: "concat")
-    params_to_form(params, @form_params, column_name: "left_search_use_skills_seclusion_skill_name_or_right_search_use_skills_seclusion_skill_name",  params_name: "seclusion_skill_form", type: "text")
+    params_to_form(params, @form_params, column_name: "left_use_skills_seclusion_skill_name_or_right_use_skills_seclusion_skill_name",  params_name: "seclusion_skill_form", type: "text")
 
     toggle_params_to_variable(params, @form_params, params_name: "show_skill", first_opened: true)
     toggle_params_to_variable(params, @form_params, params_name: "show_use_skill", first_opened: true)
