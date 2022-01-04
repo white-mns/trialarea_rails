@@ -65,7 +65,7 @@
         %td= all_use_skill.round_no
         %td= all_use_skill.battle_no
         %td
-          - skill_concatenate_text(all_use_skill.skill_concatenate)
+          - skill_concatenate_text(all_use_skill.skill_concatenate, @skill_data)
         %td.sep= battle_link(all_use_skill.battle_no, 1)
         %td= battle_link(all_use_skill.battle_no, 3)
         %td= battle_link(all_use_skill.battle_no, 2)

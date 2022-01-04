@@ -79,7 +79,7 @@
           - pc_name_text(chara_use_skill.pc_name)
         %td= chara_use_skill.battle_no
         %td
-          - skill_concatenate_text(chara_use_skill.skill_concatenate_ex)
+          - skill_concatenate_text(chara_use_skill.skill_concatenate_ex, @skill_data)
         %td= chara_use_skill.seclusion_skill.name if chara_use_skill.seclusion_skill
         %td.sep= battle_link(chara_use_skill.battle_no, 1)
         %td= battle_link(chara_use_skill.battle_no, 3)

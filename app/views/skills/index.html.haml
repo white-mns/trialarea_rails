@@ -104,7 +104,7 @@
       %th.sep= sort_link(@search, :skill_type, "種類", default_order: :desc)
       %th= sort_link(@search, :skill_id, "スキル", default_order: :desc)
       %th= sort_link(@search, :skill_ap, "AP", default_order: :desc)
-      -if @form_params["show_skill_text"] == "1"
+      - if @form_params["show_skill_text"] == "1"
         %th= sort_link(@search, :skill_text, "説明", default_order: :desc)
       - if @form_params["show_total"] == "1"
         %th.sep= sort_link(@search, :user_count, ex_sort_text(params, "user_count", "習得者数"), default_order: :desc)
@@ -120,9 +120,16 @@
           %td.pc_name
             - pc_name_text(skill.pc_name)
         %td.sep= skill_type_text(skill.skill.skill_type) if skill.skill
-        %td= skill.skill.name if skill.skill
+        %td
+          - if skill.skill
+            - if @form_params["show_skill_text"] == "1"
+              %span
+                = skill.skill.name
+            - else
+              %span{data: {bs: {toggle: "tooltip", placement: "right"}}, title: @skill_data[skill.skill.name]}
+                = skill.skill.name
         %td= skill.skill.ap if skill.skill.ap >= 0
-        -if @form_params["show_skill_text"] == "1"
+        - if @form_params["show_skill_text"] == "1"
           %td= skill.skill.text
         - if @form_params["show_total"] == "1"
           %td.text-nowrap.sep= skill.user_count

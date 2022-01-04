@@ -1,4 +1,4 @@
-- if @form_params["result_no_form"] == sprintf("%d",@latest_result) && @form_params["round_no_form"] == sprintf("%d",@latest_round) && @form_params["round_no_form"] != sprintf("%d",@latest_battle) 
+- if @form_params["result_no_form"] == sprintf("%d",@latest_result) && @form_params["round_no_form"] == sprintf("%d",@latest_round) && @form_params["round_no_form"] != sprintf("%d",@latest_battle)
   - @page_title = "次回対戦組み合わせ一覧"
 - else
   - @page_title = "対戦結果一覧"
@@ -106,17 +106,17 @@
           - pc_name_text(matching.left_pc_name)
         -if @form_params["show_skill"] == "1"
           %td
-            - skill_concatenate_text(matching.left_skills.skill_concatenate) if matching.left_skills
+            - skill_concatenate_text(matching.left_skills.skill_concatenate, @skill_data) if matching.left_skills
         -if @form_params["show_use_skill"] == "1"
           %td
-            - skill_concatenate_text(matching.left_use_skills.skill_concatenate_ex) if matching.left_use_skills
+            - skill_concatenate_text(matching.left_use_skills.skill_concatenate_ex, @skill_data) if matching.left_use_skills
         %td VS
         -if @form_params["show_use_skill"] == "1"
           %td
-            - skill_concatenate_text(matching.right_use_skills.skill_concatenate_ex) if matching.right_use_skills
+            - skill_concatenate_text(matching.right_use_skills.skill_concatenate_ex, @skill_data) if matching.right_use_skills
         -if @form_params["show_skill"] == "1"
           %td
-            - skill_concatenate_text(matching.right_skills.skill_concatenate) if matching.right_skills
+            - skill_concatenate_text(matching.right_skills.skill_concatenate, @skill_data) if matching.right_skills
         %td.pc_name
           - pc_name_text(matching.right_pc_name)
         %td.sep= battle_link(matching.battle_no, 1)

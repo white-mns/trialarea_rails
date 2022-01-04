@@ -8,6 +8,7 @@ class AllUseSkillsController < ApplicationController
     placeholder_set
     param_set
 
+    @skill_data = Hash[*SkillList.pluck(:name, :text).flatten]
     @count  = AllUseSkill.notnil().search(params[:q]).result.hit_count()
     @search = AllUseSkill.notnil().page(params[:page]).search(params[:q])
     @search.sorts = "id asc" if @search.sorts.empty?

@@ -194,19 +194,26 @@ module ApplicationHelper
     end
   end
 
-  def skill_concatenate_text(text)
+  def skill_concatenate_text(text, skill_data)
     skill_array = text.split(",")
-    skill_array.each do |skill_name|
-        if skill_name == "" then next end
-        if skill_name[0] == "!"
-            skill_name.slice!(0,1)
-            haml_tag :span, class: "fw-bold" do
-                haml_concat skill_name
-            end
-        else
-            haml_concat skill_name
+    skill_array.each do |skill_info|
+      if skill_info == "" then next end
+      skill_info_array = skill_info.split(" ")
+      skill_name = skill_info_array[0]
+      skill_count = skill_info_array[0]
+
+      if skill_name[0] == "!"
+        skill_info.slice!(0,1)
+        skill_name.slice!(0,1)
+        haml_tag :span, {class: "fw-bold", data: {bs: {toggle: "tooltip", placement: "right"}}, title: skill_data[skill_name]} do
+          haml_concat skill_info
         end
-        haml_tag :br
+      else
+        haml_tag :span, {data: {bs: {toggle: "tooltip", placement: "right"}}, title: skill_data[skill_name]} do
+          haml_concat skill_info
+        end
+      end
+      haml_tag :br
     end
   end
 end

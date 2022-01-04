@@ -85,6 +85,6 @@
         %td.pc_name
           - pc_name_text(skill_concatenate.pc_name)
         %td
-          - skill_concatenate_text(skill_concatenate.skill_concatenate)
+          - skill_concatenate_text(skill_concatenate.skill_concatenate, @skill_data)
         %td.sep= character_link(skill_concatenate.result_no, skill_concatenate.round_no, skill_concatenate.link_no)
 = paginate(@skill_concatenates)
