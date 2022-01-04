@@ -15,6 +15,7 @@
 //= require turbolinks
 //= require_tree .
 //= require jquery
+//= require popper
 //= require bootstrap-sprockets
 //= require "jquery.cleanQuery"
 //= require chartkick
@@ -58,7 +59,7 @@ function set_triggers() {
             }
         } );
     });
-    
+
     $(".tbody_toggle").on("click", function() {
         $(this).next().toggle();
         $(this).find('input:hidden').each( function(index, element) {
@@ -91,6 +92,11 @@ var turboReady = function(){
         search_close();
         desc_close();
 	}
+
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+    return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
 
     $('FORM').cleanQuery();
 

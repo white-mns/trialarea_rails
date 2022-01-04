@@ -8,6 +8,7 @@ class SkillConcatenatesController < ApplicationController
     placeholder_set
     param_set
 
+    @skill_data = Hash[*SkillList.pluck(:name, :text).flatten]
     @count  = SkillConcatenate.distinct.notnil().includes(:pc_name).search(params[:q]).result.hit_count()
     @search = SkillConcatenate.distinct.notnil().includes(:pc_name).page(params[:page]).search(params[:q])
     @search.sorts = "id asc" if @search.sorts.empty?

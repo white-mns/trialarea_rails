@@ -11,6 +11,7 @@ class SkillsController < ApplicationController
     if params["show_total"] == "1"
       @maxes  = Name.distinct.notnil().group(:result_no, :round_no).count();
     end
+    @skill_data = Hash[*SkillList.pluck(:name, :text).flatten]
     @count  = Skill.distinct.notnil().includes(:pc_name).groups(params).search(params[:q]).result.hit_count()
     @search = Skill.distinct.notnil().includes(:pc_name).groups(params).aggregations(params).having_order(params).page(params[:page]).search(params[:q])
     @search.sorts = "id asc" if @search.sorts.empty? && params["ex_sort"] != "on"
