@@ -194,28 +194,36 @@ module ApplicationHelper
     end
   end
 
+  def skill_text(skill_info, skill_data)
+    if skill_info == "" then return end
+
+    skill_info_array = skill_info.split(" ")
+    skill_name = skill_info_array[0]
+    skill_count = skill_info_array[0]
+
+    skill_title = skill_data[skill_name]
+
+    span_attr = {data: {bs: {toggle: "tooltip", placement: "right"}}, title: skill_title}
+
+    if skill_name[0] == "!"
+      skill_info.slice!(0,1)
+      skill_name.slice!(0,1)
+      span_attr[:class] = "fw-bold"
+    end
+
+    span_attr[:title] = skill_data[skill_name]
+
+    haml_tag :span, span_attr do
+      haml_concat skill_info
+    end
+  end
+
   def skill_concatenate_text(text, skill_data)
     skill_array = text.split(",")
     skill_array.each do |skill_info|
       if skill_info == "" then next end
 
-      skill_info_array = skill_info.split(" ")
-      skill_name = skill_info_array[0]
-      skill_count = skill_info_array[0]
-
-      span_attr = {data: {bs: {toggle: "tooltip", placement: "right"}}, title: skill_data[skill_name]}
-
-      if skill_name[0] == "!"
-        skill_info.slice!(0,1)
-        skill_name.slice!(0,1)
-        span_attr[:class] = "fw-bold"
-      end
-
-      span_attr[:title] = skill_data[skill_name]
-
-      haml_tag :span, span_attr do
-        haml_concat skill_info
-      end
+      skill_text(skill_info, skill_data)
 
       haml_tag :br
     end
