@@ -7,8 +7,8 @@ class AllUseSkillsController < ApplicationController
     resultno_set
     placeholder_set
     param_set
+    skill_data_set
 
-    @skill_data = Hash[*SkillList.pluck(:name, :text).flatten]
     @count  = AllUseSkill.notnil().search(params[:q]).result.hit_count()
     @search = AllUseSkill.notnil().page(params[:page]).search(params[:q])
     @search.sorts = "id asc" if @search.sorts.empty?
@@ -33,6 +33,7 @@ class AllUseSkillsController < ApplicationController
 
     toggle_params_to_variable(params, @form_params, params_name: "show_data")
   end
+
   # GET /all_use_skills/1
   #def show
   #end

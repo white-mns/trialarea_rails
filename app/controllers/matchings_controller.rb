@@ -11,8 +11,8 @@ class MatchingsController < ApplicationController
     end
     placeholder_set
     param_set
+    skill_data_set
 
-    @skill_data = Hash[*SkillList.pluck(:name, :text).flatten]
     @count  = Matching.notnil().includes(:left_pc_name, :right_pc_name, :left_skills, :right_skills, [left_use_skills: :seclusion_skill], [right_use_skills: :seclusion_skill]).search(params[:q]).result.hit_count()
     @search = Matching.notnil().includes(:left_pc_name, :right_pc_name, :left_skills, :right_skills, [left_use_skills: :seclusion_skill], [right_use_skills: :seclusion_skill]).page(params[:page]).search(params[:q])
     @search.sorts = "id asc" if @search.sorts.empty?
@@ -46,6 +46,7 @@ class MatchingsController < ApplicationController
     toggle_params_to_variable(params, @form_params, params_name: "show_use_skill", first_opened: true)
     @form_params["base_first"]    = (!params["is_form"]) ? "1" : "0"
   end
+
   # GET /matchings/1
   #def show
   #end

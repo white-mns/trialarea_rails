@@ -7,8 +7,8 @@ class SkillConcatenatesController < ApplicationController
     resultno_set
     placeholder_set
     param_set
+    skill_data_set
 
-    @skill_data = Hash[*SkillList.pluck(:name, :text).flatten]
     @count  = SkillConcatenate.distinct.notnil().includes(:pc_name).search(params[:q]).result.hit_count()
     @search = SkillConcatenate.distinct.notnil().includes(:pc_name).page(params[:page]).search(params[:q])
     @search.sorts = "id asc" if @search.sorts.empty?
@@ -41,8 +41,8 @@ class SkillConcatenatesController < ApplicationController
     checkbox_params_set_query_single(params, @form_params, checkbox: {params_name: "is_light",   query_name:"skill_skill_is_light_eq", value: 1})
     checkbox_params_set_query_single(params, @form_params, checkbox: {params_name: "is_dark",    query_name:"skill_skill_is_dark_eq", value: 1})
     checkbox_params_set_query_single(params, @form_params, checkbox: {params_name: "is_poison",  query_name:"skill_skill_is_poison_eq", value: 1})
-
   end
+
   # GET /skill_concatenates/1
   #def show
   #end

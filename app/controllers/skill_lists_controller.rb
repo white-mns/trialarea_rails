@@ -29,6 +29,7 @@ class SkillListsController < ApplicationController
     params_to_form(params, @form_params, column_name: "result_no", params_name: "result_no_form", type: "number")
     params_to_form(params, @form_params, column_name: "skill_type", params_name: "skill_type_form", type: "number")
     params_to_form(params, @form_params, column_name: "ap", params_name: "ap_form", type: "number")
+    params_to_form(params, @form_params, column_name: "priority", params_name: "priority_form", type: "number")
     params_to_form(params, @form_params, column_name: "text", params_name: "text_form", type: "text")
     params_to_form(params, @form_params, column_name: "is_physics", params_name: "is_physics_form", type: "number")
     params_to_form(params, @form_params, column_name: "is_fire", params_name: "is_fire_form", type: "number")

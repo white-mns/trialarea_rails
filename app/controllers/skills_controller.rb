@@ -11,7 +11,6 @@ class SkillsController < ApplicationController
     if params["show_total"] == "1"
       @maxes  = Name.distinct.notnil().group(:result_no, :round_no).count();
     end
-    @skill_data = Hash[*SkillList.pluck(:name, :text).flatten]
     @count  = Skill.distinct.notnil().includes(:pc_name).groups(params).search(params[:q]).result.hit_count()
     @search = Skill.distinct.notnil().includes(:pc_name).groups(params).aggregations(params).having_order(params).page(params[:page]).search(params[:q])
     @search.sorts = "id asc" if @search.sorts.empty? && params["ex_sort"] != "on"
@@ -19,6 +18,8 @@ class SkillsController < ApplicationController
   end
 
   def param_set
+    skill_data_set
+
     @form_params = {}
 
     params_clean(params)
@@ -36,6 +37,7 @@ class SkillsController < ApplicationController
 
     params_to_form(params, @form_params, column_name: "skill_name", params_name: "skill_name_form", type: "text")
     params_to_form(params, @form_params, column_name: "skill_ap", params_name: "ap_form", type: "number")
+    params_to_form(params, @form_params, column_name: "skill_priority", params_name: "priority_form", type: "number")
     params_to_form(params, @form_params, column_name: "skill_text", params_name: "text_form", type: "text")
 
     checkbox_params_set_query_any(params, @form_params, query_name: "skill_skill_type_eq_any",
@@ -56,6 +58,7 @@ class SkillsController < ApplicationController
     toggle_params_to_variable(params, @form_params, params_name: "show_skill_text")
     toggle_params_to_variable(params, @form_params, params_name: "show_total")
   end
+
   # GET /skills/1
   #def show
   #end
