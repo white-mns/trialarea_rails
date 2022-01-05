@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_17_072247) do
+ActiveRecord::Schema.define(version: 2022_01_04_230823) do
 
   create_table "all_use_skills", charset: "utf8mb4", collation: "utf8mb4_bin", force: :cascade do |t|
     t.integer "result_no"
@@ -115,6 +115,7 @@ ActiveRecord::Schema.define(version: 2020_11_17_072247) do
     t.integer "is_poison"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "priority"
     t.index ["ap"], name: "index_skill_lists_on_ap"
     t.index ["is_aqua"], name: "index_skill_lists_on_is_aqua"
     t.index ["is_dark"], name: "index_skill_lists_on_is_dark"
@@ -125,6 +126,7 @@ ActiveRecord::Schema.define(version: 2020_11_17_072247) do
     t.index ["is_quake"], name: "index_skill_lists_on_is_quake"
     t.index ["is_wind"], name: "index_skill_lists_on_is_wind"
     t.index ["name"], name: "index_skill_lists_on_name"
+    t.index ["priority"], name: "index_skill_lists_on_priority"
     t.index ["result_no", "name"], name: "resultno_name"
     t.index ["result_no", "skill_id"], name: "resultno_skillid"
     t.index ["skill_id"], name: "index_skill_lists_on_skill_id"

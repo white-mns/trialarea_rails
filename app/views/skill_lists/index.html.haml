@@ -45,6 +45,9 @@
         - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "AP", params_name: "ap_form", placeholder: "Number")
       %tr
         %td.indent
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "優先度", params_name: "priority_form", placeholder: "Number")
+      %tr
+        %td.indent
         - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "説明", params_name: "text_form", placeholder: "Number")
       %tr
         %td.indent
@@ -78,6 +81,7 @@
       %th= sort_link(@search, :skill_type, "種類", default_order: :desc)
       %th= sort_link(@search, :name, "スキル名", default_order: :desc)
       %th= sort_link(@search, :ap, "AP", default_order: :desc)
+      %th= sort_link(@search, :priority, "優先度", default_order: :desc)
       %th= sort_link(@search, :text, "説明", default_order: :desc)
       %th= sort_link(@search, :is_physics, "物理", default_order: :desc)
       %th= sort_link(@search, :is_fire, "火", default_order: :desc)
@@ -94,7 +98,8 @@
         %td= skill_list.skill_id
         %td= skill_type_text(skill_list.skill_type)
         %td= skill_list.name
-        %td= skill_list.ap if skill_list.ap >= 0
+        %td= skill_list.ap if skill_list.ap >= -100
+        %td= skill_list.priority if skill_list.priority >= -100
         %td= skill_list.text
         %td= skill_list.is_physics
         %td= skill_list.is_fire
