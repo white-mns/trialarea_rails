@@ -95,7 +95,11 @@ var turboReady = function(){
 
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
     var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-    return new bootstrap.Tooltip(tooltipTriggerEl)
+        placement = "right";
+
+        if (tooltipTriggerEl.getAttribute("data-bs-placement")) placement = tooltipTriggerEl.getAttribute("data-bs-placement");
+
+        return new bootstrap.Tooltip(tooltipTriggerEl, {placement: placement, html: true});
     })
 
     $('FORM').cleanQuery();

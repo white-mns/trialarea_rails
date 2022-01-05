@@ -51,8 +51,11 @@
                                  {label: "アビリティ", params_name: "type_ability",   class_name: "after_space"}])
       %tr.sep
         %td.indent
-        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "スキル名", params_name: "skill_name_form", placeholder: "Skill")
+        - td_form(f, @form_params, @placeholder, class_name: "formText",  label: "スキル名", params_name: "skill_name_form", placeholder: "Skill", colspan: 3)
+      %tr.sep
+        %td.indent
         - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "AP", params_name: "ap_form", placeholder: "Number")
+        - td_form(f, @form_params, @placeholder, class_name: "formNum",  label: "優先度", params_name: "priority_form", placeholder: "Number")
       %tr
         %td.indent
         - td_form(f, @form_params, @placeholder,                         label: "属性", params_name: "element_form", colspan: 3,
@@ -104,6 +107,7 @@
       %th.sep= sort_link(@search, :skill_type, "種類", default_order: :desc)
       %th= sort_link(@search, :skill_id, "スキル", default_order: :desc)
       %th= sort_link(@search, :skill_ap, "AP", default_order: :desc)
+      %th= sort_link(@search, :priority, "優先", default_order: :desc)
       - if @form_params["show_skill_text"] == "1"
         %th= sort_link(@search, :skill_text, "説明", default_order: :desc)
       - if @form_params["show_total"] == "1"
@@ -121,14 +125,9 @@
             - pc_name_text(skill.pc_name)
         %td.sep= skill_type_text(skill.skill.skill_type) if skill.skill
         %td
-          - if skill.skill
-            - if @form_params["show_skill_text"] == "1"
-              %span
-                = skill.skill.name
-            - else
-              %span{data: {bs: {toggle: "tooltip", placement: "right"}}, title: @skill_data[skill.skill.name]}
-                = skill.skill.name
-        %td= skill.skill.ap if skill.skill.ap >= 0
+          - skill_text(skill.skill.name, @skill_data) if skill.skill
+        %td= skill.skill.ap if skill.skill.ap >= -100
+        %td= skill.skill.priority if skill.skill.priority >= -100
         - if @form_params["show_skill_text"] == "1"
           %td= skill.skill.text
         - if @form_params["show_total"] == "1"

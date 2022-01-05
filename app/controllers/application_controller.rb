@@ -15,4 +15,20 @@ class ApplicationController < ActionController::Base
     @placeholder["SkillText"] = "例）10点の物理攻撃/この攻撃によって"
     @placeholder["Item"]      = "例）武器/\"防具\""
   end
+
+  def skill_data_set
+    skill_list_text = []
+    skill_list = SkillList.pluck(:name, :ap, :priority, :text)
+
+    skill_list.each do |skill_data|
+      skill_text = ""
+      if skill_data[1].present? && skill_data[1] > -100 then skill_text += "AP " + sprintf("%d", skill_data[1]) end
+      if skill_data[2].present? && skill_data[2] > -100 then skill_text += " 優先度 " + sprintf("%d", skill_data[2]) end
+      if skill_data[1].present? && skill_data[1] > -100 then skill_text += "<br>" end
+      skill_text += skill_data[3]
+      skill_list_text.push([skill_data[0], skill_text])
+    end
+
+    @skill_data = Hash[*skill_list_text.flatten]
+  end
 end
