@@ -203,7 +203,7 @@ module ApplicationHelper
 
     skill_title = skill_data[skill_name]
 
-    span_attr = {data: {bs: {toggle: "tooltip", placement: "right"}}, title: skill_title}
+    span_attr = {data: {bs: {toggle: "tooltip"}}, title: skill_title}
 
     if skill_name[0] == "!"
       skill_info.slice!(0,1)
