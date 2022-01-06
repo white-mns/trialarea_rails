@@ -105,17 +105,17 @@
         %td.pc_name
           - pc_name_text(matching.left_pc_name)
         -if @form_params["show_skill"] == "1"
-          %td
+          %td{style: "min-width:5rem"}
             - skill_concatenate_text(matching.left_skills.skill_concatenate, @skill_data) if matching.left_skills
         -if @form_params["show_use_skill"] == "1"
-          %td
+          %td{style: "min-width:5rem"}
             - skill_concatenate_text(matching.left_use_skills.skill_concatenate_ex, @skill_data) if matching.left_use_skills
         %td VS
         -if @form_params["show_use_skill"] == "1"
-          %td
+          %td{style: "min-width:5rem"}
             - skill_concatenate_text(matching.right_use_skills.skill_concatenate_ex, @skill_data) if matching.right_use_skills
         -if @form_params["show_skill"] == "1"
-          %td
+          %td{style: "min-width:5rem"}
             - skill_concatenate_text(matching.right_skills.skill_concatenate, @skill_data) if matching.right_skills
         %td.pc_name
           - pc_name_text(matching.right_pc_name)
