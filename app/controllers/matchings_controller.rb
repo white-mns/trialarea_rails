@@ -13,8 +13,8 @@ class MatchingsController < ApplicationController
     param_set
     skill_data_set
 
-    @count  = Matching.notnil().includes(:left_pc_name, :right_pc_name, :left_skills, :right_skills, [left_use_skills: :seclusion_skill], [right_use_skills: :seclusion_skill]).search(params[:q]).result.hit_count()
-    @search = Matching.notnil().includes(:left_pc_name, :right_pc_name, :left_skills, :right_skills, [left_use_skills: :seclusion_skill], [right_use_skills: :seclusion_skill]).page(params[:page]).search(params[:q])
+    @count  = Matching.notnil().includes(:left_pc_name, :right_pc_name, :left_skills, :right_skills, [left_use_skills: :seclusion_skill], [right_use_skills: :seclusion_skill]).ransack(params[:q]).result.hit_count()
+    @search = Matching.notnil().includes(:left_pc_name, :right_pc_name, :left_skills, :right_skills, [left_use_skills: :seclusion_skill], [right_use_skills: :seclusion_skill]).page(params[:page]).ransack(params[:q])
     @search.sorts = "id asc" if @search.sorts.empty?
     @matchings = @search.result.per(50)
   end

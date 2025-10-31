@@ -11,8 +11,8 @@ class SkillsController < ApplicationController
     if params["show_total"] == "1"
       @maxes  = Name.distinct.notnil().group(:result_no, :round_no).count();
     end
-    @count  = Skill.distinct.notnil().includes(:pc_name).groups(params).search(params[:q]).result.hit_count()
-    @search = Skill.distinct.notnil().includes(:pc_name).groups(params).aggregations(params).having_order(params).page(params[:page]).search(params[:q])
+    @count  = Skill.distinct.notnil().includes(:pc_name).groups(params).ransack(params[:q]).result.hit_count()
+    @search = Skill.distinct.notnil().includes(:pc_name).groups(params).aggregations(params).having_order(params).page(params[:page]).ransack(params[:q])
     @search.sorts = "id asc" if @search.sorts.empty? && params["ex_sort"] != "on"
     @skills = @search.result.per(50)
   end

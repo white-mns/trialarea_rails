@@ -9,8 +9,8 @@ class AllUseSkillsController < ApplicationController
     param_set
     skill_data_set
 
-    @count  = AllUseSkill.notnil().search(params[:q]).result.hit_count()
-    @search = AllUseSkill.notnil().page(params[:page]).search(params[:q])
+    @count  = AllUseSkill.notnil().ransack(params[:q]).result.hit_count()
+    @search = AllUseSkill.notnil().page(params[:page]).ransack(params[:q])
     @search.sorts = "id asc" if @search.sorts.empty?
     @all_use_skills = @search.result.per(50)
   end

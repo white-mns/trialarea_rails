@@ -8,8 +8,8 @@ class NameDummiesController < ApplicationController
     placeholder_set
     param_set
 
-    @count  = NameDummy.notnil().search(params[:q]).result.hit_count()
-    @search = NameDummy.notnil().page(params[:page]).search(params[:q])
+    @count  = NameDummy.notnil().ransack(params[:q]).result.hit_count()
+    @search = NameDummy.notnil().page(params[:page]).ransack(params[:q])
     @search.sorts = "id asc" if @search.sorts.empty?
     @name_dummies = @search.result.per(50)
   end
