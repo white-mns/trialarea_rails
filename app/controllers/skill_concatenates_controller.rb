@@ -8,8 +8,8 @@ class SkillConcatenatesController < ApplicationController
     placeholder_set
     param_set
 
-    @count  = SkillConcatenate.distinct.notnil().includes(:pc_name).search(params[:q]).result.hit_count()
-    @search = SkillConcatenate.distinct.notnil().includes(:pc_name).page(params[:page]).search(params[:q])
+    @count  = SkillConcatenate.distinct.notnil().includes(:pc_name).ransack(params[:q]).result.hit_count()
+    @search = SkillConcatenate.distinct.notnil().includes(:pc_name).page(params[:page]).ransack(params[:q])
     @search.sorts = "id asc" if @search.sorts.empty?
     @skill_concatenates = @search.result.per(50)
   end

@@ -8,8 +8,8 @@ class SkillListsController < ApplicationController
     placeholder_set
     param_set
 
-    @count  = SkillList.search(params[:q]).result.hit_count()
-    @search = SkillList.page(params[:page]).search(params[:q])
+    @count  = SkillList.ransack(params[:q]).result.hit_count()
+    @search = SkillList.page(params[:page]).ransack(params[:q])
     @search.sorts = "id asc" if @search.sorts.empty?
     @skill_lists = @search.result.per(50)
   end

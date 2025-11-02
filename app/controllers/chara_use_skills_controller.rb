@@ -8,8 +8,8 @@ class CharaUseSkillsController < ApplicationController
     placeholder_set
     param_set
 
-    @count  = CharaUseSkill.notnil().includes(:pc_name, :seclusion_skill).search(params[:q]).result.hit_count()
-    @search = CharaUseSkill.notnil().includes(:pc_name, :seclusion_skill).page(params[:page]).search(params[:q])
+    @count  = CharaUseSkill.notnil().includes(:pc_name, :seclusion_skill).ransack(params[:q]).result.hit_count()
+    @search = CharaUseSkill.notnil().includes(:pc_name, :seclusion_skill).page(params[:page]).ransack(params[:q])
     @search.sorts = "id asc" if @search.sorts.empty?
     @chara_use_skills = @search.result.per(50)
   end
