@@ -30,6 +30,7 @@ gcc:14.2.1
  
     bundle exec rake db:create
     bundle exec rake db:migrate
+    bundle exec rails dartsass:build
     ./unicorn start
     
 他の方法でRailsが動かせるならUnicornである必要はありません。  
