@@ -18,12 +18,12 @@
     %nav.navbar.navbar-expand-md.fixed-top.navbar-dark.bg-light.navbar-custom.p-0
       .container
         = link_to "試行領域データ小屋", root_path, :class => "navbar-brand"
-        %button.navbar-toggler{type: "button", data: {bs: {toggle: "collapse", target: "#navbarNavDropdown"}}, area: {controls: "navbarNavDropdown", expanded: "false", label: "Toggle navigation"}}
+        %button.navbar-toggler{type: "button", data: {bs: {toggle: "collapse", target: "#navbarNavDropdown"}}, aria: {controls: "navbarNavDropdown", expanded: "false", label: "Toggle navigation"}}
           %span.navbar-toggler-icon
         .collapse.navbar-collapse#navbarNavDropdown
           %ul.navbar-nav
             %li.nav-item.dropdown
-              %a.nav-link.dropdown-toggle#navbarDropdownMenuLink{ data: {bs: {:toggle =>"dropdown"}}, :href => "#", role: "button", area: {expanded: "false"}}
+              %a.nav-link.dropdown-toggle#navbarDropdownMenuLink{ data: {bs: {:toggle =>"dropdown"}}, :href => "#", role: "button", aria: {expanded: "false"}}
                 個人データ
                 %span.caret
               .dropdown-menu
@@ -33,7 +33,7 @@
                 = link_to ">　スキル習得者数ランキング", skills_path + "?show_total=1&ex_sort=on", class: "dropdown-item"
                 = link_to "習得スキル組み合わせ一覧", skill_concatenates_path, class: "dropdown-item"
             %li.nav-item.dropdown
-              %a.nav-link.dropdown-toggle#navbarDropdownMenuLink{ data: {bs: {:toggle =>"dropdown"}}, :href => "#", role: "button", area: {expanded: "false"}}
+              %a.nav-link.dropdown-toggle#navbarDropdownMenuLink{ data: {bs: {:toggle =>"dropdown"}}, :href => "#", role: "button", aria: {expanded: "false"}}
                 対戦データ
                 %span.caret
               .dropdown-menu
